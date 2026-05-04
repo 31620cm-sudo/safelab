@@ -1,29 +1,35 @@
 :root {
-  /* Brand — 차콜·베이지 모노톤 (빨강 제거) */
-  --color-primary: #1F1D1A;
-  --color-primary-dark: #000000;
-  --color-primary-light: rgba(31, 29, 26, 0.06);
-  --color-coral: #C8A487;        /* 따뜻한 베이지 액센트 (액센트가 필요할 때만) */
-  --color-warm: #E8D2BB;
-  --color-cream: #F2DFCC;
+  /* Brand — cool monochrome (차콜) */
+  --color-primary: #1A1F2E;
+  --color-primary-dark: #0E1220;
+  --color-primary-light: rgba(26, 31, 46, 0.06);
 
-  /* Surfaces — 진짜 frosted glass */
-  --color-bg: #E8D6C2;
-  --color-card: rgba(255, 255, 255, 0.28);
-  --color-card-strong: rgba(255, 255, 255, 0.42);
+  /* Dreamy accents — 핑크 / 블루 / 퍼플 / 라벤더 글로우 */
+  --color-pink: #F4C5DC;
+  --color-pink-strong: #E8A4C8;
+  --color-blue: #C5D4F4;
+  --color-blue-strong: #A4BCEC;
+  --color-purple: #D5C5F4;
+  --color-lavender: #DCD9F0;
+  --color-mint: #C5EFE3;
+
+  /* Surfaces — cool gray frosted glass */
+  --color-bg: #DDE3EB;
+  --color-card: rgba(255, 255, 255, 0.32);
+  --color-card-strong: rgba(255, 255, 255, 0.5);
   --color-card-solid: #FFFFFF;
-  --color-tint: rgba(255, 255, 255, 0.5);
+  --color-tint: rgba(255, 255, 255, 0.55);
 
   /* Text */
-  --color-text: #1F1D1A;
-  --color-text-sub: #5A544D;
-  --color-text-mute: #9A938A;
-  --color-border: rgba(31, 29, 26, 0.10);
-  --color-border-strong: rgba(31, 29, 26, 0.18);
+  --color-text: #1A1F2E;
+  --color-text-sub: #5C6478;
+  --color-text-mute: #8C92A4;
+  --color-border: rgba(26, 31, 46, 0.08);
+  --color-border-strong: rgba(26, 31, 46, 0.16);
 
-  /* Status (긴급·성공 의미는 유지하되 채도 낮춤) */
+  /* Status */
   --color-success: #10B981;
-  --color-warn: #C8A487;
+  --color-warn: #E8A4C8;
   --color-danger: #C44545;
 
   /* Geometry */
@@ -33,19 +39,19 @@
   --radius-btn: 18px;
   --radius-pill: 999px;
 
-  /* Elevation */
+  /* Elevation — 떠있는 느낌, 약간 차가운 그림자 */
   --shadow-card:
-    0 24px 60px rgba(53, 30, 14, 0.12),
-    0 8px 18px rgba(53, 30, 14, 0.06),
-    inset 0 1px 0 rgba(255, 255, 255, 0.7);
+    0 24px 60px rgba(26, 31, 46, 0.10),
+    0 8px 18px rgba(26, 31, 46, 0.05),
+    inset 0 1px 0 rgba(255, 255, 255, 0.85);
   --shadow-elev:
-    0 36px 80px rgba(53, 30, 14, 0.20),
-    0 12px 28px rgba(53, 30, 14, 0.10),
-    inset 0 1px 0 rgba(255, 255, 255, 0.75);
+    0 36px 80px rgba(26, 31, 46, 0.18),
+    0 12px 28px rgba(26, 31, 46, 0.08),
+    inset 0 1px 0 rgba(255, 255, 255, 0.9);
 
-  /* Glass — 더 강한 frosted */
-  --glass-blur: saturate(180%) blur(32px);
-  --glass-blur-strong: saturate(200%) blur(48px);
+  /* Glass — 매우 강한 frosted */
+  --glass-blur: saturate(180%) blur(36px);
+  --glass-blur-strong: saturate(200%) blur(56px);
   --glass-border: 1px solid rgba(255, 255, 255, 0.55);
 
   /* Layout */
@@ -62,11 +68,15 @@
 
   /* Typography */
   --font-sans: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Apple SD Gothic Neo', 'Noto Sans KR', sans-serif;
+
+  /* Dreamy gradient (CTA, accents) */
+  --grad-dreamy: linear-gradient(120deg, #F4C5DC 0%, #D5C5F4 50%, #C5D4F4 100%);
+  --grad-dreamy-strong: linear-gradient(120deg, #E8A4C8 0%, #B5A4E8 50%, #A4BCEC 100%);
+  --grad-mint-blue: linear-gradient(120deg, #C5EFE3 0%, #C5D4F4 100%);
 }
 
 /* ──────────────────────────────────────
-   App Shell — 따뜻한 베이지/크림 멀티-라디언트
-   카드 뒤로 비쳐 보이도록 다양한 컬러 블롭
+   App Shell — cool gray + 컬러 글로우 (NStreak 톤)
    ────────────────────────────────────── */
 .app-shell {
   min-height: 100vh;
@@ -74,22 +84,22 @@
   color: var(--color-text);
   position: relative;
   background:
-    /* 따뜻한 우상 글로우 */
-    radial-gradient(55% 45% at 90% 0%, rgba(232, 178, 138, 0.7), transparent 60%),
-    /* 크림 좌상 */
-    radial-gradient(45% 35% at 5% 10%, rgba(245, 230, 210, 0.85), transparent 65%),
-    /* 따뜻한 베이지 좌중 */
-    radial-gradient(50% 50% at 0% 50%, rgba(220, 195, 165, 0.7), transparent 65%),
-    /* 차분한 회베이지 우중 */
-    radial-gradient(40% 40% at 100% 60%, rgba(195, 170, 140, 0.55), transparent 70%),
-    /* 어두운 베이지 하단 */
-    radial-gradient(70% 50% at 50% 100%, rgba(180, 155, 125, 0.5), transparent 60%),
-    /* 베이스 */
-    linear-gradient(160deg, #F2E1CC 0%, #E2CCAF 45%, #CDB594 100%);
+    /* 핑크 글로우 우상 */
+    radial-gradient(50% 45% at 95% 0%, rgba(244, 197, 220, 0.85), transparent 60%),
+    /* 블루 글로우 좌상 */
+    radial-gradient(45% 40% at 5% 5%, rgba(197, 212, 244, 0.85), transparent 65%),
+    /* 퍼플 글로우 좌중 */
+    radial-gradient(40% 35% at 0% 55%, rgba(213, 197, 244, 0.7), transparent 70%),
+    /* 민트 글로우 우중 */
+    radial-gradient(35% 30% at 100% 50%, rgba(197, 239, 227, 0.6), transparent 70%),
+    /* 라벤더 하단 */
+    radial-gradient(60% 45% at 50% 100%, rgba(220, 217, 240, 0.7), transparent 65%),
+    /* 베이스: cool light gray */
+    linear-gradient(160deg, #E8EBF1 0%, #DDE3EB 50%, #D2DAE5 100%);
   background-attachment: fixed;
 }
 
-/* 부드러운 텍스처 */
+/* 미세한 noise/sparkle */
 .app-shell::before {
   content: '';
   position: fixed;
@@ -97,8 +107,12 @@
   pointer-events: none;
   z-index: 0;
   background:
-    repeating-radial-gradient(circle at 0% 0%, rgba(255, 255, 255, 0.06) 0 1px, transparent 1px 50px),
-    repeating-radial-gradient(circle at 100% 100%, rgba(0, 0, 0, 0.03) 0 1px, transparent 1px 70px);
+    radial-gradient(2px 2px at 20% 30%, rgba(255, 255, 255, 0.55), transparent),
+    radial-gradient(1.5px 1.5px at 70% 60%, rgba(255, 255, 255, 0.45), transparent),
+    radial-gradient(1px 1px at 40% 80%, rgba(255, 255, 255, 0.5), transparent),
+    radial-gradient(1.5px 1.5px at 88% 25%, rgba(255, 255, 255, 0.5), transparent),
+    radial-gradient(1px 1px at 12% 78%, rgba(255, 255, 255, 0.45), transparent),
+    repeating-radial-gradient(circle at 0% 0%, rgba(255, 255, 255, 0.04) 0 1px, transparent 1px 80px);
   mix-blend-mode: overlay;
 }
 
@@ -116,7 +130,7 @@
    Brand Header (legacy)
    ────────────────────────────────────── */
 .brand-header {
-  background: linear-gradient(140deg, #1F1D1A, #3A3530);
+  background: linear-gradient(140deg, #1A1F2E, #2A3045);
   color: #fff;
   padding: 28px 24px 60px;
   border-radius: 0 0 var(--radius-card-lg) var(--radius-card-lg);
@@ -187,13 +201,17 @@
 .t-btn:active { transform: scale(0.97); }
 
 .t-btn-primary {
-  background: linear-gradient(140deg, #1F1D1A 0%, #2C2925 100%);
-  color: #fff;
-  box-shadow: 0 16px 36px rgba(31, 29, 26, 0.32);
+  background: var(--grad-dreamy);
+  color: var(--color-text);
+  box-shadow:
+    0 16px 36px rgba(180, 165, 220, 0.45),
+    inset 0 1px 0 rgba(255, 255, 255, 0.8);
 }
 .t-btn-primary:hover {
   transform: translateY(-2px);
-  box-shadow: 0 22px 48px rgba(31, 29, 26, 0.42);
+  box-shadow:
+    0 22px 48px rgba(180, 165, 220, 0.55),
+    inset 0 1px 0 rgba(255, 255, 255, 0.85);
 }
 
 .t-btn-ghost {
@@ -201,7 +219,7 @@
   -webkit-backdrop-filter: var(--glass-blur);
   backdrop-filter: var(--glass-blur);
   color: var(--color-text);
-  border: 1px solid rgba(31, 29, 26, 0.18);
+  border: 1px solid rgba(255, 255, 255, 0.55);
   box-shadow: var(--shadow-card);
 }
 .t-btn-ghost:hover {
@@ -234,7 +252,7 @@
 .t-input:focus {
   border-color: var(--color-text);
   background: rgba(255, 255, 255, 0.85);
-  box-shadow: 0 0 0 4px rgba(31, 29, 26, 0.08);
+  box-shadow: 0 0 0 4px rgba(180, 165, 220, 0.22);
 }
 
 /* ──────────────────────────────────────
@@ -263,17 +281,17 @@
   backdrop-filter: blur(10px);
 }
 .pill-red {
-  background: rgba(31, 29, 26, 0.08);
-  color: var(--color-text);
-  border: 1px solid var(--color-border-strong);
+  background: rgba(232, 164, 200, 0.32);
+  color: #8C2D5C;
+  border: 1px solid rgba(232, 164, 200, 0.45);
 }
 .pill-gray {
-  background: rgba(0, 0, 0, 0.05);
+  background: rgba(26, 31, 46, 0.05);
   color: var(--color-text-sub);
   border: 1px solid var(--color-border);
 }
 .pill-green {
-  background: rgba(16, 185, 129, 0.16);
+  background: rgba(197, 239, 227, 0.5);
   color: #047857;
   border: 1px solid rgba(16, 185, 129, 0.22);
 }
@@ -291,7 +309,7 @@
   width: 52px;
   height: 52px;
   border-radius: 18px;
-  background: rgba(255, 255, 255, 0.45);
+  background: rgba(255, 255, 255, 0.5);
   -webkit-backdrop-filter: var(--glass-blur);
   backdrop-filter: var(--glass-blur);
   border: 1px solid rgba(255, 255, 255, 0.6);
