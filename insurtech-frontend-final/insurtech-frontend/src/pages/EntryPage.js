@@ -72,7 +72,7 @@ export default function EntryPage() {
           <strong>SafeLab</strong>
         </div>
         <button className="entry-topbar-btn" onClick={() => navigate('/emergency')}>
-          🚨 긴급 연락처
+          긴급 연락처
         </button>
       </header>
 
@@ -138,22 +138,22 @@ export default function EntryPage() {
         <h2 className="entry-section-title">왜 SafeLab인가</h2>
         <div className="entry-features-grid">
           <div className="entry-feature">
-            <div className="entry-feature-icon" style={{ background: '#FFE5E5', color: '#E60000' }}>📜</div>
+            <div className="entry-feature-icon">📜</div>
             <strong>법정 의무공제 위 부가가치</strong>
             <p>「연구실 안전환경 조성에 관한 법률」 제26조 약관과 1:1 매핑된 컨텐츠</p>
           </div>
           <div className="entry-feature">
-            <div className="entry-feature-icon" style={{ background: '#FEF3C7', color: '#92400E' }}>🤖</div>
+            <div className="entry-feature-icon">🤖</div>
             <strong>AI 1인칭 시나리오</strong>
             <p>학과별 사고 케이스 4단계 시뮬레이션 — 보상/제외 사유 즉시 학습</p>
           </div>
           <div className="entry-feature">
-            <div className="entry-feature-icon" style={{ background: '#DCFCE7', color: '#15803D' }}>📋</div>
+            <div className="entry-feature-icon">📋</div>
             <strong>관리자 대시보드</strong>
             <p>학과별 이수율, 미이수자 명단, 사고 분포까지 한 화면에</p>
           </div>
           <div className="entry-feature">
-            <div className="entry-feature-icon" style={{ background: '#DBEAFE', color: '#1D4ED8' }}>🚨</div>
+            <div className="entry-feature-icon">🧯</div>
             <strong>긴급 ≠ 보험</strong>
             <p>사고 순간엔 119·학과 안전관리자로 직결. 보험 청구는 그 다음.</p>
           </div>
