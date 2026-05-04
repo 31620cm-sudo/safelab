@@ -7,6 +7,7 @@ import DeviceCheckPage from './pages/DeviceCheckPage';
 import ConsultationRoomPage from './pages/ConsultationRoomPage';
 import SummaryPage from './pages/SummaryPage';
 import DashboardPage from './pages/DashboardPage';
+import SafetyLandingPage from './pages/SafetyLandingPage';
 
 function App() {
   return (
@@ -20,6 +21,7 @@ function App() {
         <Route path="/room/:roomId" element={<ConsultationRoomPage />} />
         <Route path="/summary/:roomId" element={<SummaryPage />} />
         <Route path="/dashboard" element={<DashboardPage />} />
+        <Route path="/landing" element={<SafetyLandingPage />} />
       </Routes>
     </BrowserRouter>
   );

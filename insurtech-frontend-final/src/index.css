@@ -1,0 +1,47 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --brand-primary: #2563eb;
+  --brand-secondary: #0d9488;
+  --brand-accent: #f59e0b;
+  --bg-soft: #fafaf9;
+  --text-primary: #1a1a1a;
+  --text-muted: #6b7280;
+}
+
+.landing-root {
+  scroll-behavior: smooth;
+  font-family: 'Inter', 'Pretendard', system-ui, sans-serif;
+  color: var(--text-primary);
+  background: var(--bg-soft);
+  -webkit-font-smoothing: antialiased;
+}
+
+.landing-root h1,
+.landing-root h2,
+.landing-root h3 {
+  font-family: 'Manrope', 'Pretendard', system-ui, sans-serif;
+  letter-spacing: -0.02em;
+}
+
+.landing-root .hero-mega {
+  font-size: clamp(4rem, 12vw, 12rem);
+  line-height: 0.9;
+  font-weight: 800;
+  letter-spacing: -0.04em;
+}
+
+.landing-root button,
+.landing-root input,
+.landing-root textarea,
+.landing-root select {
+  font: inherit;
+  color: inherit;
+}
+
+.landing-root .grid-dots {
+  background-image: radial-gradient(rgba(0, 0, 0, 0.07) 1px, transparent 1px);
+  background-size: 22px 22px;
+}
