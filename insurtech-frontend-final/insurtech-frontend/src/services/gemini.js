@@ -2,7 +2,10 @@ import { matchScenario } from './scenarioMatcher';
 import { LAB_SAFETY_CONTEXT, LAB_SAFETY_QUIZ_HINTS } from '../data/labsafetyExcerpt';
 import { getDepartment } from '../data/departments';
 
-const GEMINI_API_KEY = "YOUR_GEMINI_API_KEY_HERE";
+// API 키는 환경변수에서만 읽음. 코드에 절대 하드코딩 금지.
+// - 로컬 개발: insurtech-frontend/.env.local 에 REACT_APP_GEMINI_API_KEY=...
+// - Vercel: 프로젝트 Settings → Environment Variables 에 동일 이름으로 추가
+const GEMINI_API_KEY = process.env.REACT_APP_GEMINI_API_KEY || "YOUR_GEMINI_API_KEY_HERE";
 const GEMINI_URL = `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${GEMINI_API_KEY}`;
 
 const callGemini = async (prompt, { temperature = 0.4, maxOutputTokens = 1500 } = {}) => {
