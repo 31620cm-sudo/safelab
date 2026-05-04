@@ -1,20 +1,50 @@
 :root {
+  /* Brand */
   --color-primary: #E60000;
   --color-primary-dark: #B30000;
   --color-primary-light: #FFE5E5;
-  --color-bg: #F5F5F7;
-  --color-card: #FFFFFF;
+  --color-coral: #FF7A6A;
+  --color-warm: #F5C99B;
+
+  /* Surfaces — Vision Pro 라이트 글래스 톤 */
+  --color-bg: #F5EDE6;
+  --color-bg-2: #EFE3D7;
+  --color-bg-3: #FFFFFF;
+  --color-card: rgba(255, 255, 255, 0.72);
+  --color-card-solid: #FFFFFF;
+  --color-card-strong: rgba(255, 255, 255, 0.92);
+  --color-tint: rgba(255, 255, 255, 0.5);
+
+  /* Text */
   --color-text: #1A1A1A;
   --color-text-sub: #6B7280;
-  --color-border: #E5E7EB;
+  --color-text-mute: #9CA3AF;
+  --color-border: rgba(26, 26, 26, 0.08);
+  --color-border-strong: rgba(26, 26, 26, 0.14);
+
+  /* Status */
   --color-success: #10B981;
   --color-warn: #F59E0B;
-  --radius-card: 18px;
-  --radius-btn: 12px;
+
+  /* Geometry */
+  --radius-card: 26px;
+  --radius-card-lg: 32px;
+  --radius-btn: 14px;
   --radius-pill: 999px;
-  --shadow-card: 0 4px 16px rgba(0, 0, 0, 0.06);
-  --shadow-elev: 0 8px 28px rgba(0, 0, 0, 0.12);
+
+  /* Elevation — 부드럽고 큰 깊이감 */
+  --shadow-card: 0 8px 28px rgba(33, 24, 16, 0.08), 0 2px 6px rgba(33, 24, 16, 0.04);
+  --shadow-elev: 0 18px 48px rgba(33, 24, 16, 0.16), 0 4px 12px rgba(33, 24, 16, 0.06);
+  --shadow-glow-red: 0 12px 30px rgba(230, 0, 0, 0.22);
+
+  /* Glass */
+  --glass-blur: saturate(180%) blur(20px);
+  --glass-border: 1px solid rgba(255, 255, 255, 0.7);
+
+  /* Layout */
   --max-mobile: 480px;
+
+  /* Spacing */
   --space-1: 4px;
   --space-2: 8px;
   --space-3: 12px;
@@ -22,31 +52,45 @@
   --space-5: 20px;
   --space-6: 24px;
   --space-8: 32px;
+
+  /* Typography */
   --font-sans: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Apple SD Gothic Neo', 'Noto Sans KR', sans-serif;
 }
 
+/* ──────────────────────────────────────
+   App Shell — 따뜻한 베이지 그라디언트
+   ────────────────────────────────────── */
 .app-shell {
   min-height: 100vh;
-  background: var(--color-bg);
   font-family: var(--font-sans);
   color: var(--color-text);
+  background:
+    radial-gradient(1200px 600px at 85% -10%, rgba(255, 122, 106, 0.18), transparent 60%),
+    radial-gradient(900px 500px at 0% 30%, rgba(245, 201, 155, 0.22), transparent 65%),
+    radial-gradient(700px 500px at 50% 110%, rgba(230, 0, 0, 0.08), transparent 70%),
+    linear-gradient(180deg, #FAF6F2 0%, #F0E6DC 100%);
+  background-attachment: fixed;
 }
 
 .mobile-frame {
   max-width: var(--max-mobile);
   margin: 0 auto;
-  background: var(--color-bg);
+  background: transparent;
   min-height: 100vh;
   position: relative;
   padding-bottom: 80px;
 }
 
+/* ──────────────────────────────────────
+   Brand Header (legacy 잔여 — 사용중)
+   ────────────────────────────────────── */
 .brand-header {
-  background: var(--color-primary);
+  background: linear-gradient(140deg, var(--color-primary), var(--color-coral));
   color: #fff;
   padding: 28px 24px 60px;
-  border-radius: 0 0 var(--radius-card) var(--radius-card);
+  border-radius: 0 0 var(--radius-card-lg) var(--radius-card-lg);
   position: relative;
+  box-shadow: var(--shadow-glow-red);
 }
 
 .brand-header h1 {
@@ -57,7 +101,7 @@
 
 .brand-header p {
   font-size: 14px;
-  opacity: 0.92;
+  opacity: 0.94;
 }
 
 .card-stack {
@@ -67,8 +111,14 @@
   gap: var(--space-4);
 }
 
+/* ──────────────────────────────────────
+   Cards — Glass
+   ────────────────────────────────────── */
 .t-card {
   background: var(--color-card);
+  -webkit-backdrop-filter: var(--glass-blur);
+  backdrop-filter: var(--glass-blur);
+  border: var(--glass-border);
   border-radius: var(--radius-card);
   box-shadow: var(--shadow-card);
   padding: var(--space-6);
@@ -76,11 +126,11 @@
 
 .t-card.click {
   cursor: pointer;
-  transition: transform 0.18s ease, box-shadow 0.18s ease;
+  transition: transform 0.22s cubic-bezier(.2,.8,.2,1), box-shadow 0.22s;
 }
 
 .t-card.click:hover {
-  transform: translateY(-2px);
+  transform: translateY(-3px);
   box-shadow: var(--shadow-elev);
 }
 
@@ -88,82 +138,125 @@
   font-size: 17px;
   font-weight: 700;
   margin-bottom: 6px;
+  letter-spacing: -0.2px;
 }
 
 .t-card-sub {
   font-size: 13px;
   color: var(--color-text-sub);
-  line-height: 1.5;
+  line-height: 1.55;
 }
 
+/* ──────────────────────────────────────
+   Buttons
+   ────────────────────────────────────── */
 .t-btn {
   display: inline-flex;
   align-items: center;
   justify-content: center;
   gap: 6px;
-  padding: 12px 20px;
+  padding: 14px 22px;
   border-radius: var(--radius-btn);
   font-size: 15px;
-  font-weight: 600;
+  font-weight: 700;
   border: none;
   cursor: pointer;
-  transition: background 0.18s, transform 0.1s;
+  transition: all 0.18s cubic-bezier(.2,.8,.2,1);
   font-family: inherit;
+  letter-spacing: -0.1px;
 }
 
 .t-btn:active { transform: scale(0.98); }
 
 .t-btn-primary {
-  background: var(--color-primary);
+  background: linear-gradient(140deg, var(--color-primary), #FF3B3B);
   color: #fff;
+  box-shadow: var(--shadow-glow-red);
 }
-.t-btn-primary:hover { background: var(--color-primary-dark); }
+.t-btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 16px 36px rgba(230, 0, 0, 0.32);
+}
 
 .t-btn-ghost {
-  background: transparent;
+  background: var(--color-card-strong);
+  -webkit-backdrop-filter: var(--glass-blur);
+  backdrop-filter: var(--glass-blur);
   color: var(--color-primary);
-  border: 1px solid var(--color-primary);
+  border: 1px solid rgba(230, 0, 0, 0.25);
 }
-.t-btn-ghost:hover { background: var(--color-primary-light); }
-
-.t-btn-block {
-  width: 100%;
+.t-btn-ghost:hover {
+  background: #fff;
+  border-color: var(--color-primary);
 }
 
+.t-btn-block { width: 100%; }
+
+/* ──────────────────────────────────────
+   Form
+   ────────────────────────────────────── */
 .t-input {
   width: 100%;
   padding: 14px 16px;
   border-radius: var(--radius-btn);
-  border: 1px solid var(--color-border);
-  background: #fff;
+  border: 1px solid var(--color-border-strong);
+  background: rgba(255, 255, 255, 0.65);
+  -webkit-backdrop-filter: blur(12px);
+  backdrop-filter: blur(12px);
   font-size: 15px;
   font-family: inherit;
   outline: none;
-  transition: border-color 0.18s;
+  transition: border-color 0.18s, box-shadow 0.18s, background 0.18s;
+  color: var(--color-text);
 }
 
-.t-input:focus { border-color: var(--color-primary); }
+.t-input::placeholder { color: var(--color-text-mute); }
 
+.t-input:focus {
+  border-color: var(--color-primary);
+  background: #fff;
+  box-shadow: 0 0 0 4px rgba(230, 0, 0, 0.12);
+}
+
+/* ──────────────────────────────────────
+   Section title
+   ────────────────────────────────────── */
 .section-title {
-  font-size: 13px;
-  font-weight: 700;
+  font-size: 12px;
+  font-weight: 800;
   color: var(--color-text-sub);
-  letter-spacing: 0.5px;
+  letter-spacing: 1.2px;
   text-transform: uppercase;
   margin: var(--space-6) var(--space-5) var(--space-3);
 }
 
+/* ──────────────────────────────────────
+   Pills
+   ────────────────────────────────────── */
 .pill {
   display: inline-block;
-  padding: 4px 12px;
+  padding: 5px 12px;
   border-radius: var(--radius-pill);
   font-size: 12px;
-  font-weight: 600;
+  font-weight: 700;
+  letter-spacing: -0.1px;
 }
-.pill-red { background: var(--color-primary-light); color: var(--color-primary); }
-.pill-gray { background: #F3F4F6; color: var(--color-text-sub); }
-.pill-green { background: #DCFCE7; color: #15803D; }
+.pill-red {
+  background: rgba(230, 0, 0, 0.10);
+  color: var(--color-primary);
+}
+.pill-gray {
+  background: rgba(0, 0, 0, 0.06);
+  color: var(--color-text-sub);
+}
+.pill-green {
+  background: rgba(16, 185, 129, 0.14);
+  color: #047857;
+}
 
+/* ──────────────────────────────────────
+   Misc
+   ────────────────────────────────────── */
 .row-between {
   display: flex;
   align-items: center;
@@ -173,8 +266,8 @@
 .icon-circle {
   width: 48px;
   height: 48px;
-  border-radius: 50%;
-  background: var(--color-primary-light);
+  border-radius: 16px;
+  background: rgba(230, 0, 0, 0.10);
   color: var(--color-primary);
   display: flex;
   align-items: center;
@@ -185,7 +278,7 @@
 .t-link {
   color: var(--color-primary);
   font-size: 14px;
-  font-weight: 600;
+  font-weight: 700;
   background: none;
   border: none;
   cursor: pointer;
