@@ -1,6 +1,7 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { ArrowRight, ShieldCheck, HardHat, ChevronLeft, ChevronRight, CheckCircle2 } from 'lucide-react';
+import SmartLink from './SmartLink';
 import { HERO } from '../../data/landing';
 
 export default function Hero() {
@@ -76,20 +77,20 @@ export default function Hero() {
               {HERO.subcopy}
             </p>
             <div className="mt-8 flex flex-wrap items-center gap-3">
-              <a
-                href={HERO.ctaPrimary.href}
+              <SmartLink
+                to={HERO.ctaPrimary.to}
                 className="inline-flex items-center gap-2 rounded-full bg-brand-primary text-white px-6 py-3.5 text-sm font-semibold shadow-glow transition hover:scale-[1.03] hover:shadow-xl active:scale-[0.98]"
               >
                 {HERO.ctaPrimary.label}
                 <ArrowRight size={16} />
-              </a>
-              <a
-                href={HERO.ctaSecondary.href}
+              </SmartLink>
+              <SmartLink
+                to={HERO.ctaSecondary.to}
                 className="inline-flex items-center gap-2 rounded-full border border-black/10 bg-white/70 backdrop-blur px-6 py-3.5 text-sm font-semibold text-text-primary transition hover:bg-white hover:scale-[1.02]"
               >
                 {HERO.ctaSecondary.label}
                 <ArrowRight size={16} />
-              </a>
+              </SmartLink>
             </div>
             <ul className="mt-8 flex flex-wrap items-center gap-x-5 gap-y-2 text-xs text-text-muted">
               <li className="inline-flex items-center gap-1.5">

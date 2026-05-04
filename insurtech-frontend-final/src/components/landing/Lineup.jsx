@@ -1,6 +1,7 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { ArrowUpRight, BookOpenCheck, ShieldCheck, Activity } from 'lucide-react';
+import SmartLink from './SmartLink';
 import { LINEUP } from '../../data/landing';
 
 const ICONS = { BookOpenCheck, ShieldCheck, Activity };
@@ -63,16 +64,16 @@ export default function Lineup() {
                   </p>
                 </div>
 
-                <a
-                  href="#contact"
+                <SmartLink
+                  to={item.to || '#contact'}
                   className="mt-2 inline-flex w-full items-center justify-between rounded-full bg-white border border-black/10 pl-5 pr-3 py-3 text-sm font-semibold transition group-hover:bg-text-primary group-hover:text-white"
-                  aria-label={`${item.name} 자세히 보기`}
+                  aria-label={`${item.name} ${item.ctaLabel || '자세히 보기'}`}
                 >
-                  <span>{item.name}</span>
+                  <span>{item.ctaLabel || item.name}</span>
                   <span className="inline-flex h-8 w-8 items-center justify-center rounded-full bg-brand-primary text-white">
                     <ArrowUpRight size={16} />
                   </span>
-                </a>
+                </SmartLink>
               </motion.article>
             );
           })}

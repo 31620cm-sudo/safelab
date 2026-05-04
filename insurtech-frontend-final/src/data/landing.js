@@ -1,17 +1,30 @@
-// 안전관리/안전교육 랜딩페이지의 모든 카피·데이터 단일 소스.
-// 카피·메뉴·태그·카드·라인업·연락처를 여기에서만 수정하세요.
+// 안전관리/안전교육 랜딩페이지의 모든 카피·데이터·라우트 단일 소스.
+//
+// to 필드 규칙 (SmartLink가 자동 분기):
+//   '#anchor'  → 페이지 내 스크롤 (<a>)
+//   '/route'   → React Router SPA 이동 (<Link>)
+//   'http://'  → 외부 링크 (새 탭)
+//
+// 기존 앱 라우트 참고:
+//   /login /register /main /device-check /room/:roomId /summary/:roomId /dashboard
+// 카피·메뉴·태그·라인업·연락처를 여기에서만 수정하세요.
 
 export const BRAND = {
   name: '인슈어테크',
   enName: 'INSURETECH',
   tagline: 'Safer Lab, Safer Tomorrow',
+  homeTo: '#hero',
 };
 
 export const HEADER_MENUS = [
-  { label: '서비스 소개', href: '#about' },
-  { label: '라인업', href: '#lineup' },
-  { label: '도입 문의', href: '#contact' },
-  { label: '문의하기', href: '#contact' },
+  { label: '서비스 소개', to: '#about' },
+  { label: '라인업', to: '#lineup' },
+  { label: '대시보드', to: '/dashboard' },
+];
+
+export const HEADER_AUTH = [
+  { label: '로그인', to: '/login', variant: 'ghost' },
+  { label: '시작하기', to: '/register', variant: 'primary' },
 ];
 
 export const HERO = {
@@ -20,8 +33,8 @@ export const HERO = {
   headline: '안전한 실험실,\n안심하는 단체보험',
   subcopy:
     '공대 실험실의 안전교육 이수부터 학생 단체보험 리스크 관리까지 — 인슈어테크가 한 번에 연결합니다.',
-  ctaPrimary: { label: '무료 안전 진단 받기', href: '#contact' },
-  ctaSecondary: { label: '라인업 살펴보기', href: '#lineup' },
+  ctaPrimary: { label: '무료 안전 진단 받기', to: '/register' },
+  ctaSecondary: { label: '라인업 살펴보기', to: '#lineup' },
 };
 
 export const ABOUT = {
@@ -74,6 +87,8 @@ export const LINEUP = {
       gradient: 'from-blue-500 to-blue-700',
       pillBg: 'bg-blue-50',
       pillText: 'text-blue-700',
+      to: '/main',
+      ctaLabel: '교육 시작하기',
     },
     {
       key: 'campusguard',
@@ -84,6 +99,8 @@ export const LINEUP = {
       gradient: 'from-rose-400 to-rose-600',
       pillBg: 'bg-rose-50',
       pillText: 'text-rose-700',
+      to: '/register',
+      ctaLabel: '보험 상담 신청',
     },
     {
       key: 'riskradar',
@@ -94,6 +111,8 @@ export const LINEUP = {
       gradient: 'from-amber-400 to-amber-600',
       pillBg: 'bg-amber-50',
       pillText: 'text-amber-700',
+      to: '/dashboard',
+      ctaLabel: '대시보드 바로가기',
     },
   ],
 };
@@ -119,24 +138,25 @@ export const FOOTER = {
     {
       title: '서비스',
       links: [
-        { label: '서비스 소개', href: '#about' },
-        { label: '라인업', href: '#lineup' },
-        { label: '도입 문의', href: '#contact' },
+        { label: '서비스 소개', to: '#about' },
+        { label: '라인업', to: '#lineup' },
+        { label: '도입 문의', to: '#contact' },
       ],
     },
     {
-      title: '회사',
+      title: '바로가기',
       links: [
-        { label: '팀 소개', href: '#about' },
-        { label: '경진대회 출품', href: '#about' },
-        { label: '블로그', href: '#' },
+        { label: '로그인', to: '/login' },
+        { label: '회원가입', to: '/register' },
+        { label: '메인 홈', to: '/main' },
+        { label: '대시보드', to: '/dashboard' },
       ],
     },
   ],
   socials: [
-    { icon: 'Instagram', label: 'Instagram', href: '#' },
-    { icon: 'Youtube', label: 'YouTube', href: '#' },
-    { icon: 'MessageCircle', label: 'KakaoTalk', href: '#' },
+    { icon: 'Instagram', label: 'Instagram', to: 'https://instagram.com' },
+    { icon: 'Youtube', label: 'YouTube', to: 'https://youtube.com' },
+    { icon: 'MessageCircle', label: 'KakaoTalk', to: '#contact' },
   ],
   copyright: '© 2026 인슈어테크. 인하공업전문대학 경진대회 출품.',
 };

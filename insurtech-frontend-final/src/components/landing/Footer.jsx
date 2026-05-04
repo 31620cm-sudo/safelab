@@ -1,5 +1,6 @@
 import React from 'react';
 import { ShieldCheck, Instagram, Youtube, MessageCircle } from 'lucide-react';
+import SmartLink from './SmartLink';
 import { FOOTER, BRAND } from '../../data/landing';
 
 const ICONS = { Instagram, Youtube, MessageCircle };
@@ -24,13 +25,13 @@ export default function Footer() {
                 const Icon = ICONS[s.icon] || MessageCircle;
                 return (
                   <li key={s.label}>
-                    <a
-                      href={s.href}
+                    <SmartLink
+                      to={s.to}
                       aria-label={s.label}
                       className="inline-flex h-10 w-10 items-center justify-center rounded-full border border-black/10 bg-white text-text-primary/80 transition hover:bg-brand-primary hover:text-white hover:border-transparent hover:scale-105"
                     >
                       <Icon size={16} />
-                    </a>
+                    </SmartLink>
                   </li>
                 );
               })}
@@ -45,12 +46,12 @@ export default function Footer() {
               <ul className="mt-4 space-y-2.5">
                 {col.links.map((link) => (
                   <li key={link.label}>
-                    <a
-                      href={link.href}
+                    <SmartLink
+                      to={link.to}
                       className="text-sm text-text-primary/80 hover:text-brand-primary transition"
                     >
                       {link.label}
-                    </a>
+                    </SmartLink>
                   </li>
                 ))}
               </ul>
