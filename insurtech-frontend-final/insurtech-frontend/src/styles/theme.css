@@ -1,121 +1,186 @@
+/* ─────────────────────────────────────────────────────────────
+   SafeLab Design System v3 — Editorial / Aurora / Bento
+   레퍼런스: Linear, Vercel, Arc, Framer, Apple Vision Pro
+   ───────────────────────────────────────────────────────────── */
+
 :root {
-  /* Brand — cool monochrome (차콜) */
-  --color-primary: #1A1F2E;
-  --color-primary-dark: #0E1220;
-  --color-primary-light: rgba(26, 31, 46, 0.06);
+  /* Surfaces */
+  --bg: #FAFAFC;
+  --bg-2: #F2F3F7;
+  --bg-3: #ECEDF1;
+  --ink: #0B0B12;
+  --ink-2: #1F2030;
+  --ink-3: #4B4D60;
+  --ink-mute: #8C8FA3;
+  --line: rgba(11, 11, 18, 0.08);
+  --line-2: rgba(11, 11, 18, 0.14);
 
-  /* Dreamy accents — 핑크 / 블루 / 퍼플 / 라벤더 글로우 */
-  --color-pink: #F4C5DC;
-  --color-pink-strong: #E8A4C8;
-  --color-blue: #C5D4F4;
-  --color-blue-strong: #A4BCEC;
-  --color-purple: #D5C5F4;
-  --color-lavender: #DCD9F0;
-  --color-mint: #C5EFE3;
+  /* Glass */
+  --glass: rgba(255, 255, 255, 0.55);
+  --glass-strong: rgba(255, 255, 255, 0.78);
+  --glass-thin: rgba(255, 255, 255, 0.32);
+  --glass-border: 1px solid rgba(255, 255, 255, 0.7);
+  --glass-blur: saturate(180%) blur(28px);
+  --glass-blur-strong: saturate(200%) blur(48px);
 
-  /* Surfaces — cool gray frosted glass */
-  --color-bg: #DDE3EB;
-  --color-card: rgba(255, 255, 255, 0.32);
-  --color-card-strong: rgba(255, 255, 255, 0.5);
-  --color-card-solid: #FFFFFF;
-  --color-tint: rgba(255, 255, 255, 0.55);
+  /* Aurora palette */
+  --aurora-pink: #FFB7D5;
+  --aurora-rose: #FF9DC4;
+  --aurora-blue: #A6C8FF;
+  --aurora-purple: #C4B5FD;
+  --aurora-lavender: #DDD6FE;
+  --aurora-mint: #A7F3D0;
+  --aurora-peach: #FED7AA;
 
-  /* Text */
-  --color-text: #1A1F2E;
-  --color-text-sub: #5C6478;
-  --color-text-mute: #8C92A4;
-  --color-border: rgba(26, 31, 46, 0.08);
-  --color-border-strong: rgba(26, 31, 46, 0.16);
+  /* Brand legacy */
+  --color-primary: #0B0B12;
+  --color-primary-dark: #000;
+  --color-primary-light: rgba(11, 11, 18, 0.05);
 
-  /* Status */
+  /* Backwards compatibility (older CSS keys) */
+  --color-bg: var(--bg);
+  --color-card: var(--glass);
+  --color-card-strong: var(--glass-strong);
+  --color-card-solid: #fff;
+  --color-text: var(--ink);
+  --color-text-sub: var(--ink-3);
+  --color-text-mute: var(--ink-mute);
+  --color-border: var(--line);
+  --color-border-strong: var(--line-2);
   --color-success: #10B981;
-  --color-warn: #E8A4C8;
-  --color-danger: #C44545;
+  --color-warn: #F59E0B;
+  --color-danger: #DC2626;
 
   /* Geometry */
-  --radius-card: 32px;
-  --radius-card-lg: 40px;
-  --radius-card-xl: 48px;
-  --radius-btn: 18px;
+  --r-sm: 12px;
+  --r-md: 18px;
+  --r-lg: 24px;
+  --r-xl: 32px;
+  --r-2xl: 40px;
+  --radius-card: var(--r-xl);
+  --radius-card-lg: var(--r-2xl);
+  --radius-btn: 14px;
   --radius-pill: 999px;
 
-  /* Elevation — 떠있는 느낌, 약간 차가운 그림자 */
-  --shadow-card:
-    0 24px 60px rgba(26, 31, 46, 0.10),
-    0 8px 18px rgba(26, 31, 46, 0.05),
-    inset 0 1px 0 rgba(255, 255, 255, 0.85);
-  --shadow-elev:
-    0 36px 80px rgba(26, 31, 46, 0.18),
-    0 12px 28px rgba(26, 31, 46, 0.08),
-    inset 0 1px 0 rgba(255, 255, 255, 0.9);
+  /* Elevation */
+  --shadow-sm: 0 4px 12px rgba(11, 11, 18, 0.05);
+  --shadow-md: 0 18px 40px rgba(11, 11, 18, 0.08), 0 4px 12px rgba(11, 11, 18, 0.04);
+  --shadow-lg: 0 32px 80px rgba(11, 11, 18, 0.14), 0 8px 24px rgba(11, 11, 18, 0.06);
+  --shadow-xl: 0 56px 120px rgba(11, 11, 18, 0.20), 0 16px 36px rgba(11, 11, 18, 0.10);
+  --shadow-card: var(--shadow-md);
+  --shadow-elev: var(--shadow-lg);
 
-  /* Glass — 매우 강한 frosted */
-  --glass-blur: saturate(180%) blur(36px);
-  --glass-blur-strong: saturate(200%) blur(56px);
-  --glass-border: 1px solid rgba(255, 255, 255, 0.55);
-
-  /* Layout */
-  --max-mobile: 480px;
-
-  /* Spacing */
-  --space-1: 4px;
-  --space-2: 8px;
-  --space-3: 12px;
-  --space-4: 16px;
-  --space-5: 20px;
-  --space-6: 24px;
-  --space-8: 32px;
+  /* Aurora gradients */
+  --grad-aurora: conic-gradient(from 180deg at 50% 50%,
+    var(--aurora-pink) 0deg,
+    var(--aurora-purple) 90deg,
+    var(--aurora-blue) 180deg,
+    var(--aurora-mint) 270deg,
+    var(--aurora-pink) 360deg);
+  --grad-dreamy: linear-gradient(120deg, var(--aurora-pink) 0%, var(--aurora-purple) 50%, var(--aurora-blue) 100%);
+  --grad-dreamy-strong: linear-gradient(120deg, var(--aurora-rose) 0%, #B5A4E8 50%, #8FB1FF 100%);
+  --grad-mint-blue: linear-gradient(120deg, var(--aurora-mint) 0%, var(--aurora-blue) 100%);
+  --grad-button-dark: linear-gradient(180deg, #1F2030 0%, #0B0B12 100%);
 
   /* Typography */
-  --font-sans: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Apple SD Gothic Neo', 'Noto Sans KR', sans-serif;
+  --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Pretendard', 'Apple SD Gothic Neo', 'Noto Sans KR', sans-serif;
+  --font-display: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Pretendard', 'Apple SD Gothic Neo', 'Noto Sans KR', sans-serif;
 
-  /* Dreamy gradient (CTA, accents) */
-  --grad-dreamy: linear-gradient(120deg, #F4C5DC 0%, #D5C5F4 50%, #C5D4F4 100%);
-  --grad-dreamy-strong: linear-gradient(120deg, #E8A4C8 0%, #B5A4E8 50%, #A4BCEC 100%);
-  --grad-mint-blue: linear-gradient(120deg, #C5EFE3 0%, #C5D4F4 100%);
+  /* Spacing scale */
+  --s-1: 4px; --s-2: 8px; --s-3: 12px; --s-4: 16px;
+  --s-5: 20px; --s-6: 24px; --s-8: 32px; --s-10: 40px;
+  --s-12: 48px; --s-16: 64px; --s-20: 80px;
+
+  --max-mobile: 480px;
+  --max-content: 1240px;
 }
 
 /* ──────────────────────────────────────
-   App Shell — cool gray + 컬러 글로우 (NStreak 톤)
+   Reset & global
+   ────────────────────────────────────── */
+*, *::before, *::after { box-sizing: border-box; }
+
+html { -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; }
+
+body {
+  font-family: var(--font-sans);
+  color: var(--ink);
+  background: var(--bg);
+  font-feature-settings: 'cv11', 'ss01', 'ss03';
+  letter-spacing: -0.01em;
+}
+
+/* ──────────────────────────────────────
+   App Shell — Aurora animated mesh
    ────────────────────────────────────── */
 .app-shell {
   min-height: 100vh;
   font-family: var(--font-sans);
-  color: var(--color-text);
+  color: var(--ink);
   position: relative;
-  background:
-    /* 핑크 글로우 우상 */
-    radial-gradient(50% 45% at 95% 0%, rgba(244, 197, 220, 0.85), transparent 60%),
-    /* 블루 글로우 좌상 */
-    radial-gradient(45% 40% at 5% 5%, rgba(197, 212, 244, 0.85), transparent 65%),
-    /* 퍼플 글로우 좌중 */
-    radial-gradient(40% 35% at 0% 55%, rgba(213, 197, 244, 0.7), transparent 70%),
-    /* 민트 글로우 우중 */
-    radial-gradient(35% 30% at 100% 50%, rgba(197, 239, 227, 0.6), transparent 70%),
-    /* 라벤더 하단 */
-    radial-gradient(60% 45% at 50% 100%, rgba(220, 217, 240, 0.7), transparent 65%),
-    /* 베이스: cool light gray */
-    linear-gradient(160deg, #E8EBF1 0%, #DDE3EB 50%, #D2DAE5 100%);
-  background-attachment: fixed;
+  background: var(--bg);
+  overflow-x: hidden;
 }
 
-/* 미세한 noise/sparkle */
+/* 부드러운 noise texture overlay */
 .app-shell::before {
   content: '';
   position: fixed;
   inset: 0;
   pointer-events: none;
   z-index: 0;
-  background:
-    radial-gradient(2px 2px at 20% 30%, rgba(255, 255, 255, 0.55), transparent),
-    radial-gradient(1.5px 1.5px at 70% 60%, rgba(255, 255, 255, 0.45), transparent),
-    radial-gradient(1px 1px at 40% 80%, rgba(255, 255, 255, 0.5), transparent),
-    radial-gradient(1.5px 1.5px at 88% 25%, rgba(255, 255, 255, 0.5), transparent),
-    radial-gradient(1px 1px at 12% 78%, rgba(255, 255, 255, 0.45), transparent),
-    repeating-radial-gradient(circle at 0% 0%, rgba(255, 255, 255, 0.04) 0 1px, transparent 1px 80px);
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='200' height='200' viewBox='0 0 200 200'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.04 0'/></filter><rect width='200' height='200' filter='url(%23n)'/></svg>");
+  opacity: 0.6;
   mix-blend-mode: overlay;
 }
 
+/* Aurora orb 시스템 — fixed로 깔리고 여러 개가 천천히 움직임 */
+.aurora-orb {
+  position: fixed;
+  border-radius: 50%;
+  filter: blur(90px);
+  pointer-events: none;
+  z-index: 0;
+  opacity: 0.85;
+  animation: aurora-drift 22s ease-in-out infinite;
+}
+
+.aurora-orb.o1 {
+  width: 720px; height: 720px;
+  background: radial-gradient(circle, var(--aurora-pink) 0%, transparent 65%);
+  top: -260px; right: -180px;
+}
+
+.aurora-orb.o2 {
+  width: 640px; height: 640px;
+  background: radial-gradient(circle, var(--aurora-blue) 0%, transparent 65%);
+  bottom: -180px; left: -180px;
+  animation-delay: -7s;
+}
+
+.aurora-orb.o3 {
+  width: 540px; height: 540px;
+  background: radial-gradient(circle, var(--aurora-purple) 0%, transparent 65%);
+  top: 38%; left: 35%;
+  animation-delay: -14s;
+  opacity: 0.55;
+}
+
+.aurora-orb.o4 {
+  width: 380px; height: 380px;
+  background: radial-gradient(circle, var(--aurora-mint) 0%, transparent 65%);
+  top: 18%; left: 8%;
+  animation-delay: -3s;
+  opacity: 0.45;
+}
+
+@keyframes aurora-drift {
+  0%,   100% { transform: translate(0, 0) scale(1); }
+  33%        { transform: translate(40px, -30px) scale(1.08); }
+  66%        { transform: translate(-30px, 40px) scale(0.95); }
+}
+
+/* mobile frame은 좁게 */
 .mobile-frame {
   max-width: var(--max-mobile);
   margin: 0 auto;
@@ -126,44 +191,41 @@
   z-index: 1;
 }
 
-/* ──────────────────────────────────────
-   Brand Header (legacy)
-   ────────────────────────────────────── */
 .brand-header {
-  background: linear-gradient(140deg, #1A1F2E, #2A3045);
+  background: var(--grad-button-dark);
   color: #fff;
   padding: 28px 24px 60px;
-  border-radius: 0 0 var(--radius-card-lg) var(--radius-card-lg);
+  border-radius: 0 0 var(--r-2xl) var(--r-2xl);
 }
 
 .card-stack {
-  margin: -40px var(--space-5) 0;
+  margin: -40px var(--s-5) 0;
   display: flex;
   flex-direction: column;
-  gap: var(--space-4);
+  gap: var(--s-4);
 }
 
 /* ──────────────────────────────────────
-   Cards — Frosted Glass (강한 투명도)
+   Generic glass cards
    ────────────────────────────────────── */
 .t-card {
-  background: var(--color-card);
+  background: var(--glass);
   -webkit-backdrop-filter: var(--glass-blur);
   backdrop-filter: var(--glass-blur);
   border: var(--glass-border);
   border-radius: var(--radius-card);
-  box-shadow: var(--shadow-card);
-  padding: var(--space-6);
+  box-shadow: var(--shadow-md);
+  padding: var(--s-6);
 }
 
 .t-card.click {
   cursor: pointer;
-  transition: transform 0.28s cubic-bezier(.2,.8,.2,1), box-shadow 0.28s;
+  transition: transform 0.32s cubic-bezier(.2,.8,.2,1), box-shadow 0.32s;
 }
 
 .t-card.click:hover {
   transform: translateY(-4px);
-  box-shadow: var(--shadow-elev);
+  box-shadow: var(--shadow-lg);
 }
 
 .t-card-title {
@@ -175,7 +237,7 @@
 
 .t-card-sub {
   font-size: 13px;
-  color: var(--color-text-sub);
+  color: var(--ink-3);
   line-height: 1.55;
 }
 
@@ -186,11 +248,11 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  gap: 6px;
-  padding: 14px 24px;
+  gap: 8px;
+  padding: 14px 22px;
   border-radius: var(--radius-btn);
   font-size: 15px;
-  font-weight: 700;
+  font-weight: 600;
   border: none;
   cursor: pointer;
   transition: all 0.22s cubic-bezier(.2,.8,.2,1);
@@ -198,33 +260,30 @@
   letter-spacing: -0.2px;
 }
 
-.t-btn:active { transform: scale(0.97); }
+.t-btn:active { transform: scale(0.98); }
 
 .t-btn-primary {
-  background: var(--grad-dreamy);
-  color: var(--color-text);
-  box-shadow:
-    0 16px 36px rgba(180, 165, 220, 0.45),
-    inset 0 1px 0 rgba(255, 255, 255, 0.8);
+  background: var(--grad-button-dark);
+  color: #fff;
+  box-shadow: 0 12px 28px rgba(11, 11, 18, 0.32), inset 0 1px 0 rgba(255, 255, 255, 0.10);
 }
 .t-btn-primary:hover {
   transform: translateY(-2px);
-  box-shadow:
-    0 22px 48px rgba(180, 165, 220, 0.55),
-    inset 0 1px 0 rgba(255, 255, 255, 0.85);
+  box-shadow: 0 18px 36px rgba(11, 11, 18, 0.42), inset 0 1px 0 rgba(255, 255, 255, 0.12);
 }
 
 .t-btn-ghost {
-  background: var(--color-card-strong);
+  background: var(--glass-strong);
   -webkit-backdrop-filter: var(--glass-blur);
   backdrop-filter: var(--glass-blur);
-  color: var(--color-text);
-  border: 1px solid rgba(255, 255, 255, 0.55);
-  box-shadow: var(--shadow-card);
+  color: var(--ink);
+  border: var(--glass-border);
+  box-shadow: var(--shadow-md);
 }
 .t-btn-ghost:hover {
-  background: rgba(255, 255, 255, 0.7);
+  background: #fff;
   transform: translateY(-2px);
+  box-shadow: var(--shadow-lg);
 }
 
 .t-btn-block { width: 100%; }
@@ -236,23 +295,23 @@
   width: 100%;
   padding: 14px 18px;
   border-radius: var(--radius-btn);
-  border: 1px solid var(--color-border-strong);
-  background: rgba(255, 255, 255, 0.45);
+  border: 1px solid var(--line-2);
+  background: var(--glass-strong);
   -webkit-backdrop-filter: blur(20px);
   backdrop-filter: blur(20px);
   font-size: 15px;
   font-family: inherit;
   outline: none;
   transition: all 0.22s;
-  color: var(--color-text);
+  color: var(--ink);
 }
 
-.t-input::placeholder { color: var(--color-text-mute); }
+.t-input::placeholder { color: var(--ink-mute); }
 
 .t-input:focus {
-  border-color: var(--color-text);
-  background: rgba(255, 255, 255, 0.85);
-  box-shadow: 0 0 0 4px rgba(180, 165, 220, 0.22);
+  border-color: var(--ink);
+  background: #fff;
+  box-shadow: 0 0 0 4px rgba(11, 11, 18, 0.08);
 }
 
 /* ──────────────────────────────────────
@@ -260,38 +319,40 @@
    ────────────────────────────────────── */
 .section-title {
   font-size: 12px;
-  font-weight: 800;
-  color: var(--color-text-sub);
+  font-weight: 700;
+  color: var(--ink-3);
   letter-spacing: 1.5px;
   text-transform: uppercase;
-  margin: var(--space-6) var(--space-5) var(--space-3);
+  margin: var(--s-6) var(--s-5) var(--s-3);
 }
 
 /* ──────────────────────────────────────
    Pills
    ────────────────────────────────────── */
 .pill {
-  display: inline-block;
-  padding: 5px 14px;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 5px 12px;
   border-radius: var(--radius-pill);
   font-size: 12px;
-  font-weight: 700;
+  font-weight: 600;
   letter-spacing: -0.1px;
   -webkit-backdrop-filter: blur(10px);
   backdrop-filter: blur(10px);
 }
 .pill-red {
-  background: rgba(232, 164, 200, 0.32);
-  color: #8C2D5C;
-  border: 1px solid rgba(232, 164, 200, 0.45);
+  background: rgba(11, 11, 18, 0.06);
+  color: var(--ink);
+  border: 1px solid var(--line-2);
 }
 .pill-gray {
-  background: rgba(26, 31, 46, 0.05);
-  color: var(--color-text-sub);
-  border: 1px solid var(--color-border);
+  background: rgba(11, 11, 18, 0.05);
+  color: var(--ink-3);
+  border: 1px solid var(--line);
 }
 .pill-green {
-  background: rgba(197, 239, 227, 0.5);
+  background: rgba(167, 243, 208, 0.55);
   color: #047857;
   border: 1px solid rgba(16, 185, 129, 0.22);
 }
@@ -308,29 +369,32 @@
 .icon-circle {
   width: 52px;
   height: 52px;
-  border-radius: 18px;
-  background: rgba(255, 255, 255, 0.5);
+  border-radius: 16px;
+  background: var(--glass-strong);
   -webkit-backdrop-filter: var(--glass-blur);
   backdrop-filter: var(--glass-blur);
-  border: 1px solid rgba(255, 255, 255, 0.6);
-  color: var(--color-text);
+  border: var(--glass-border);
+  color: var(--ink);
   display: flex;
   align-items: center;
   justify-content: center;
   font-size: 24px;
-  box-shadow: var(--shadow-card);
+  box-shadow: var(--shadow-sm);
 }
 
 .t-link {
-  color: var(--color-text);
+  color: var(--ink);
   font-size: 14px;
-  font-weight: 700;
+  font-weight: 600;
   background: none;
   border: none;
   cursor: pointer;
   padding: 0;
   font-family: inherit;
   text-decoration: underline;
-  text-decoration-color: var(--color-border-strong);
+  text-decoration-color: var(--line-2);
   text-underline-offset: 4px;
 }
+
+/* Selection */
+::selection { background: var(--aurora-purple); color: var(--ink); }
