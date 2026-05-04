@@ -5,41 +5,49 @@
   --color-primary-light: #FFE5E5;
   --color-coral: #FF7A6A;
   --color-warm: #F5C99B;
+  --color-rose: #F4B7A7;
+  --color-cream: #F2DFCC;
 
-  /* Surfaces — Vision Pro 라이트 글래스 톤 */
-  --color-bg: #F5EDE6;
-  --color-bg-2: #EFE3D7;
-  --color-bg-3: #FFFFFF;
-  --color-card: rgba(255, 255, 255, 0.72);
+  /* Surfaces — 진짜 frosted glass */
+  --color-bg: #EBDDCD;
+  --color-card: rgba(255, 255, 255, 0.42);
+  --color-card-strong: rgba(255, 255, 255, 0.65);
   --color-card-solid: #FFFFFF;
-  --color-card-strong: rgba(255, 255, 255, 0.92);
   --color-tint: rgba(255, 255, 255, 0.5);
 
   /* Text */
   --color-text: #1A1A1A;
-  --color-text-sub: #6B7280;
-  --color-text-mute: #9CA3AF;
-  --color-border: rgba(26, 26, 26, 0.08);
-  --color-border-strong: rgba(26, 26, 26, 0.14);
+  --color-text-sub: #5C5852;
+  --color-text-mute: #9C9690;
+  --color-border: rgba(26, 24, 22, 0.08);
+  --color-border-strong: rgba(26, 24, 22, 0.16);
 
   /* Status */
   --color-success: #10B981;
   --color-warn: #F59E0B;
 
-  /* Geometry */
-  --radius-card: 26px;
-  --radius-card-lg: 32px;
-  --radius-btn: 14px;
+  /* Geometry — Vision Pro 톤: 매우 둥글고 큰 모서리 */
+  --radius-card: 32px;
+  --radius-card-lg: 40px;
+  --radius-card-xl: 48px;
+  --radius-btn: 18px;
   --radius-pill: 999px;
 
-  /* Elevation — 부드럽고 큰 깊이감 */
-  --shadow-card: 0 8px 28px rgba(33, 24, 16, 0.08), 0 2px 6px rgba(33, 24, 16, 0.04);
-  --shadow-elev: 0 18px 48px rgba(33, 24, 16, 0.16), 0 4px 12px rgba(33, 24, 16, 0.06);
-  --shadow-glow-red: 0 12px 30px rgba(230, 0, 0, 0.22);
+  /* Elevation — Vision Pro 떠있는 느낌 */
+  --shadow-card:
+    0 24px 60px rgba(53, 30, 14, 0.12),
+    0 8px 18px rgba(53, 30, 14, 0.06),
+    inset 0 1px 0 rgba(255, 255, 255, 0.65);
+  --shadow-elev:
+    0 36px 80px rgba(53, 30, 14, 0.20),
+    0 12px 28px rgba(53, 30, 14, 0.10),
+    inset 0 1px 0 rgba(255, 255, 255, 0.7);
+  --shadow-glow-red: 0 16px 40px rgba(230, 0, 0, 0.32);
 
-  /* Glass */
-  --glass-blur: saturate(180%) blur(20px);
-  --glass-border: 1px solid rgba(255, 255, 255, 0.7);
+  /* Glass — 강한 frosted */
+  --glass-blur: saturate(180%) blur(28px);
+  --glass-blur-strong: saturate(200%) blur(40px);
+  --glass-border: 1px solid rgba(255, 255, 255, 0.55);
 
   /* Layout */
   --max-mobile: 480px;
@@ -58,18 +66,38 @@
 }
 
 /* ──────────────────────────────────────
-   App Shell — 따뜻한 베이지 그라디언트
+   App Shell — 따뜻한 인테리어 그라디언트 메시 (이미지 없이)
    ────────────────────────────────────── */
 .app-shell {
   min-height: 100vh;
   font-family: var(--font-sans);
   color: var(--color-text);
+  position: relative;
   background:
-    radial-gradient(1200px 600px at 85% -10%, rgba(255, 122, 106, 0.18), transparent 60%),
-    radial-gradient(900px 500px at 0% 30%, rgba(245, 201, 155, 0.22), transparent 65%),
-    radial-gradient(700px 500px at 50% 110%, rgba(230, 0, 0, 0.08), transparent 70%),
-    linear-gradient(180deg, #FAF6F2 0%, #F0E6DC 100%);
+    /* 코랄 글로우 우상 */
+    radial-gradient(60% 50% at 90% 0%, rgba(255, 130, 110, 0.55), transparent 60%),
+    /* 웜 베이지 글로우 좌중앙 */
+    radial-gradient(50% 50% at 0% 35%, rgba(245, 201, 155, 0.65), transparent 65%),
+    /* 로즈 글로우 하단 */
+    radial-gradient(70% 50% at 60% 100%, rgba(244, 183, 167, 0.55), transparent 60%),
+    /* 약한 빨강 우하 */
+    radial-gradient(40% 30% at 100% 80%, rgba(230, 0, 0, 0.18), transparent 70%),
+    /* 베이스 */
+    linear-gradient(160deg, #F5E6D6 0%, #E8D2BB 50%, #DFC5A8 100%);
   background-attachment: fixed;
+}
+
+/* 부드러운 textured noise (CSS만으로) — 진짜 인테리어 느낌 */
+.app-shell::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  background:
+    repeating-radial-gradient(circle at 0% 0%, rgba(255, 255, 255, 0.04) 0 1px, transparent 1px 60px),
+    repeating-radial-gradient(circle at 100% 100%, rgba(0, 0, 0, 0.025) 0 1px, transparent 1px 80px);
+  mix-blend-mode: overlay;
 }
 
 .mobile-frame {
@@ -79,29 +107,18 @@
   min-height: 100vh;
   position: relative;
   padding-bottom: 80px;
+  z-index: 1;
 }
 
 /* ──────────────────────────────────────
-   Brand Header (legacy 잔여 — 사용중)
+   Brand Header (legacy)
    ────────────────────────────────────── */
 .brand-header {
   background: linear-gradient(140deg, var(--color-primary), var(--color-coral));
   color: #fff;
   padding: 28px 24px 60px;
   border-radius: 0 0 var(--radius-card-lg) var(--radius-card-lg);
-  position: relative;
   box-shadow: var(--shadow-glow-red);
-}
-
-.brand-header h1 {
-  font-size: 22px;
-  font-weight: 800;
-  margin-bottom: 6px;
-}
-
-.brand-header p {
-  font-size: 14px;
-  opacity: 0.94;
 }
 
 .card-stack {
@@ -112,7 +129,7 @@
 }
 
 /* ──────────────────────────────────────
-   Cards — Glass
+   Cards — Frosted Glass (강한)
    ────────────────────────────────────── */
 .t-card {
   background: var(--color-card);
@@ -126,11 +143,11 @@
 
 .t-card.click {
   cursor: pointer;
-  transition: transform 0.22s cubic-bezier(.2,.8,.2,1), box-shadow 0.22s;
+  transition: transform 0.28s cubic-bezier(.2,.8,.2,1), box-shadow 0.28s;
 }
 
 .t-card.click:hover {
-  transform: translateY(-3px);
+  transform: translateY(-4px);
   box-shadow: var(--shadow-elev);
 }
 
@@ -138,7 +155,7 @@
   font-size: 17px;
   font-weight: 700;
   margin-bottom: 6px;
-  letter-spacing: -0.2px;
+  letter-spacing: -0.3px;
 }
 
 .t-card-sub {
@@ -155,27 +172,27 @@
   align-items: center;
   justify-content: center;
   gap: 6px;
-  padding: 14px 22px;
+  padding: 14px 24px;
   border-radius: var(--radius-btn);
   font-size: 15px;
   font-weight: 700;
   border: none;
   cursor: pointer;
-  transition: all 0.18s cubic-bezier(.2,.8,.2,1);
+  transition: all 0.22s cubic-bezier(.2,.8,.2,1);
   font-family: inherit;
-  letter-spacing: -0.1px;
+  letter-spacing: -0.2px;
 }
 
-.t-btn:active { transform: scale(0.98); }
+.t-btn:active { transform: scale(0.97); }
 
 .t-btn-primary {
-  background: linear-gradient(140deg, var(--color-primary), #FF3B3B);
+  background: linear-gradient(140deg, var(--color-primary) 0%, #FF3B3B 60%, var(--color-coral) 100%);
   color: #fff;
   box-shadow: var(--shadow-glow-red);
 }
 .t-btn-primary:hover {
   transform: translateY(-2px);
-  box-shadow: 0 16px 36px rgba(230, 0, 0, 0.32);
+  box-shadow: 0 22px 50px rgba(230, 0, 0, 0.42);
 }
 
 .t-btn-ghost {
@@ -183,11 +200,12 @@
   -webkit-backdrop-filter: var(--glass-blur);
   backdrop-filter: var(--glass-blur);
   color: var(--color-primary);
-  border: 1px solid rgba(230, 0, 0, 0.25);
+  border: 1px solid rgba(230, 0, 0, 0.3);
+  box-shadow: var(--shadow-card);
 }
 .t-btn-ghost:hover {
-  background: #fff;
-  border-color: var(--color-primary);
+  background: rgba(255, 255, 255, 0.85);
+  transform: translateY(-2px);
 }
 
 .t-btn-block { width: 100%; }
@@ -197,16 +215,16 @@
    ────────────────────────────────────── */
 .t-input {
   width: 100%;
-  padding: 14px 16px;
+  padding: 14px 18px;
   border-radius: var(--radius-btn);
   border: 1px solid var(--color-border-strong);
-  background: rgba(255, 255, 255, 0.65);
-  -webkit-backdrop-filter: blur(12px);
-  backdrop-filter: blur(12px);
+  background: rgba(255, 255, 255, 0.55);
+  -webkit-backdrop-filter: blur(16px);
+  backdrop-filter: blur(16px);
   font-size: 15px;
   font-family: inherit;
   outline: none;
-  transition: border-color 0.18s, box-shadow 0.18s, background 0.18s;
+  transition: all 0.22s;
   color: var(--color-text);
 }
 
@@ -214,8 +232,8 @@
 
 .t-input:focus {
   border-color: var(--color-primary);
-  background: #fff;
-  box-shadow: 0 0 0 4px rgba(230, 0, 0, 0.12);
+  background: rgba(255, 255, 255, 0.92);
+  box-shadow: 0 0 0 4px rgba(230, 0, 0, 0.14);
 }
 
 /* ──────────────────────────────────────
@@ -225,7 +243,7 @@
   font-size: 12px;
   font-weight: 800;
   color: var(--color-text-sub);
-  letter-spacing: 1.2px;
+  letter-spacing: 1.5px;
   text-transform: uppercase;
   margin: var(--space-6) var(--space-5) var(--space-3);
 }
@@ -235,23 +253,28 @@
    ────────────────────────────────────── */
 .pill {
   display: inline-block;
-  padding: 5px 12px;
+  padding: 5px 14px;
   border-radius: var(--radius-pill);
   font-size: 12px;
   font-weight: 700;
   letter-spacing: -0.1px;
+  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
 }
 .pill-red {
-  background: rgba(230, 0, 0, 0.10);
+  background: rgba(230, 0, 0, 0.12);
   color: var(--color-primary);
+  border: 1px solid rgba(230, 0, 0, 0.18);
 }
 .pill-gray {
   background: rgba(0, 0, 0, 0.06);
   color: var(--color-text-sub);
+  border: 1px solid var(--color-border);
 }
 .pill-green {
-  background: rgba(16, 185, 129, 0.14);
+  background: rgba(16, 185, 129, 0.16);
   color: #047857;
+  border: 1px solid rgba(16, 185, 129, 0.22);
 }
 
 /* ──────────────────────────────────────
@@ -264,15 +287,17 @@
 }
 
 .icon-circle {
-  width: 48px;
-  height: 48px;
-  border-radius: 16px;
-  background: rgba(230, 0, 0, 0.10);
+  width: 52px;
+  height: 52px;
+  border-radius: 18px;
+  background: linear-gradient(140deg, rgba(230, 0, 0, 0.16), rgba(255, 122, 106, 0.22));
+  border: 1px solid rgba(255, 255, 255, 0.6);
   color: var(--color-primary);
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 22px;
+  font-size: 24px;
+  box-shadow: 0 6px 16px rgba(230, 0, 0, 0.12);
 }
 
 .t-link {

@@ -8,25 +8,32 @@
   overflow-x: hidden;
 }
 
-/* 배경 위 떠있는 부드러운 라이트 — interior glow 흉내 */
+/* 배경 글로우 blob — 더 큼, 더 강함 */
 .entry-bg-blob {
   position: fixed;
   border-radius: 50%;
-  filter: blur(110px);
+  filter: blur(140px);
   z-index: 0;
   pointer-events: none;
+  animation: blob-float 18s ease-in-out infinite;
 }
 
 .entry-bg-blob-1 {
-  width: 560px; height: 560px;
-  background: radial-gradient(circle, rgba(255, 122, 106, 0.45), transparent 60%);
-  top: -160px; right: -160px;
+  width: 720px; height: 720px;
+  background: radial-gradient(circle, rgba(255, 122, 106, 0.65), transparent 60%);
+  top: -200px; right: -180px;
 }
 
 .entry-bg-blob-2 {
-  width: 460px; height: 460px;
-  background: radial-gradient(circle, rgba(245, 201, 155, 0.55), transparent 60%);
-  top: 280px; left: -160px;
+  width: 600px; height: 600px;
+  background: radial-gradient(circle, rgba(245, 201, 155, 0.7), transparent 60%);
+  top: 260px; left: -180px;
+  animation-delay: -6s;
+}
+
+@keyframes blob-float {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  50%      { transform: translate(40px, -30px) scale(1.08); }
 }
 
 /* ────── Topbar ────── */
@@ -102,18 +109,19 @@
 .entry-tag {
   display: inline-flex;
   align-items: center;
-  gap: 8px;
-  background: var(--color-card-strong);
+  gap: 10px;
+  background: rgba(255, 255, 255, 0.55);
   -webkit-backdrop-filter: var(--glass-blur);
   backdrop-filter: var(--glass-blur);
-  border: 1px solid rgba(230, 0, 0, 0.18);
+  border: 1px solid rgba(255, 255, 255, 0.6);
   color: var(--color-primary);
-  padding: 8px 16px;
+  padding: 10px 20px;
   border-radius: var(--radius-pill);
   font-size: 12px;
-  font-weight: 700;
-  margin-bottom: 24px;
-  box-shadow: var(--shadow-card);
+  font-weight: 800;
+  margin-bottom: 28px;
+  box-shadow: 0 8px 24px rgba(53, 30, 14, 0.10);
+  letter-spacing: 0.2px;
 }
 
 .entry-tag::before {
@@ -124,11 +132,11 @@
 }
 
 .entry-hero-text h1 {
-  font-size: 56px;
+  font-size: 64px;
   font-weight: 800;
-  line-height: 1.1;
-  letter-spacing: -1.6px;
-  margin-bottom: 20px;
+  line-height: 1.05;
+  letter-spacing: -2.2px;
+  margin-bottom: 22px;
   color: var(--color-text);
 }
 
@@ -182,10 +190,10 @@
 }
 
 .entry-cta-ghost {
-  background: var(--color-card-strong);
+  background: rgba(255, 255, 255, 0.55);
   -webkit-backdrop-filter: var(--glass-blur);
   backdrop-filter: var(--glass-blur);
-  border: var(--glass-border);
+  border: 1px solid rgba(255, 255, 255, 0.6);
   color: var(--color-text);
   box-shadow: var(--shadow-card);
 }
@@ -232,12 +240,12 @@
   display: flex;
   align-items: center;
   gap: 18px;
-  padding: 20px 24px;
-  background: var(--color-card);
+  padding: 22px 26px;
+  background: rgba(255, 255, 255, 0.45);
   -webkit-backdrop-filter: var(--glass-blur);
   backdrop-filter: var(--glass-blur);
-  border: var(--glass-border);
-  border-radius: 22px;
+  border: 1px solid rgba(255, 255, 255, 0.55);
+  border-radius: 28px;
   box-shadow: var(--shadow-card);
 }
 
@@ -280,25 +288,59 @@
 
 .entry-hero-glow {
   position: absolute;
-  width: 440px; height: 600px;
+  width: 520px; height: 700px;
   background:
-    radial-gradient(closest-side, rgba(255, 122, 106, 0.30), transparent 65%),
-    radial-gradient(closest-side, rgba(230, 0, 0, 0.14), transparent 70%);
+    radial-gradient(closest-side, rgba(255, 122, 106, 0.45), transparent 65%),
+    radial-gradient(closest-side, rgba(230, 0, 0, 0.18), transparent 70%);
   z-index: 0;
+  filter: blur(20px);
+}
+
+/* phone 뒤로 떠있는 작은 글래스 카드들 (depth) */
+.entry-hero-visual::before,
+.entry-hero-visual::after {
+  content: '';
+  position: absolute;
+  border-radius: 28px;
+  background: rgba(255, 255, 255, 0.42);
+  -webkit-backdrop-filter: var(--glass-blur);
+  backdrop-filter: var(--glass-blur);
+  border: 1px solid rgba(255, 255, 255, 0.55);
+  box-shadow: var(--shadow-card);
+  z-index: 0;
+  animation: float-card 8s ease-in-out infinite;
+}
+
+.entry-hero-visual::before {
+  width: 160px; height: 100px;
+  top: 12%; left: 4%;
+  transform: rotate(-6deg);
+  animation-delay: -3s;
+}
+
+.entry-hero-visual::after {
+  width: 140px; height: 90px;
+  bottom: 14%; right: 2%;
+  transform: rotate(5deg);
+}
+
+@keyframes float-card {
+  0%, 100% { transform: translateY(0) rotate(var(--rot, -6deg)); }
+  50%      { transform: translateY(-14px) rotate(var(--rot, -6deg)); }
 }
 
 .phone-mockup {
   position: relative;
-  width: 290px;
-  height: 580px;
+  width: 300px;
+  height: 600px;
   background: linear-gradient(180deg, #2A2A2C, #1A1A1A);
-  border-radius: 44px;
+  border-radius: 48px;
   padding: 12px;
   box-shadow:
-    0 40px 80px rgba(33, 24, 16, 0.22),
-    0 16px 30px rgba(33, 24, 16, 0.10),
-    inset 0 0 0 2px rgba(255, 255, 255, 0.06);
-  z-index: 1;
+    0 60px 100px rgba(33, 24, 16, 0.28),
+    0 24px 40px rgba(33, 24, 16, 0.14),
+    inset 0 0 0 2px rgba(255, 255, 255, 0.08);
+  z-index: 2;
 }
 
 .phone-notch {
@@ -313,8 +355,11 @@
 
 .phone-screen {
   width: 100%; height: 100%;
-  background: linear-gradient(180deg, #FAF6F2 0%, #F0E6DC 100%);
-  border-radius: 32px;
+  background:
+    radial-gradient(60% 40% at 80% 0%, rgba(255, 122, 106, 0.35), transparent 60%),
+    radial-gradient(50% 40% at 0% 100%, rgba(245, 201, 155, 0.45), transparent 65%),
+    linear-gradient(180deg, #F5E6D6 0%, #E8D2BB 100%);
+  border-radius: 36px;
   overflow: hidden;
   position: relative;
   padding: 32px 14px 14px;
@@ -380,13 +425,13 @@
 }
 
 .mock-card {
-  background: rgba(255, 255, 255, 0.72);
-  -webkit-backdrop-filter: blur(8px);
-  backdrop-filter: blur(8px);
-  border-radius: 14px;
-  padding: 10px 12px;
-  border: 1px solid rgba(255, 255, 255, 0.6);
-  box-shadow: 0 4px 12px rgba(33, 24, 16, 0.06);
+  background: rgba(255, 255, 255, 0.55);
+  -webkit-backdrop-filter: blur(14px);
+  backdrop-filter: blur(14px);
+  border-radius: 18px;
+  padding: 12px 14px;
+  border: 1px solid rgba(255, 255, 255, 0.65);
+  box-shadow: 0 8px 18px rgba(33, 24, 16, 0.08);
 }
 
 .mock-card-done { border-left: 3px solid var(--color-success); opacity: 0.92; }
@@ -508,18 +553,18 @@
 }
 
 .entry-feature {
-  background: var(--color-card);
+  background: rgba(255, 255, 255, 0.42);
   -webkit-backdrop-filter: var(--glass-blur);
   backdrop-filter: var(--glass-blur);
-  border: var(--glass-border);
-  border-radius: 22px;
-  padding: 24px 22px;
-  transition: transform 0.22s cubic-bezier(.2,.8,.2,1), box-shadow 0.22s;
+  border: 1px solid rgba(255, 255, 255, 0.55);
+  border-radius: 28px;
+  padding: 26px 24px;
+  transition: transform 0.28s cubic-bezier(.2,.8,.2,1), box-shadow 0.28s;
   box-shadow: var(--shadow-card);
 }
 
 .entry-feature:hover {
-  transform: translateY(-4px);
+  transform: translateY(-6px);
   box-shadow: var(--shadow-elev);
 }
 
@@ -565,12 +610,12 @@
 }
 
 .entry-how-step {
-  background: var(--color-card);
+  background: rgba(255, 255, 255, 0.42);
   -webkit-backdrop-filter: var(--glass-blur);
   backdrop-filter: var(--glass-blur);
-  border: var(--glass-border);
-  border-radius: 20px;
-  padding: 20px 18px;
+  border: 1px solid rgba(255, 255, 255, 0.55);
+  border-radius: 24px;
+  padding: 22px 20px;
   position: relative;
   box-shadow: var(--shadow-card);
 }
