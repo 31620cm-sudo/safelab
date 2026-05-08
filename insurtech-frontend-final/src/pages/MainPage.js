@@ -1,6 +1,28 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { SAMPLE_CONSULT_HISTORY } from '../data/labsafety';
 import './MainPage.css';
+
+// 자료 기반(연구실안전공제)이 아닌 더미가 들어있을 때 자동으로 연구실 사고 시나리오로 reset.
+// 자동차/교통사고/상해 등 일반 보험 더미를 정리하기 위함.
+const STALE_KEYWORDS = /교통사고|자동차|상해\s*-\s*\d/;
+
+function loadConsultHistory() {
+  try {
+    const raw = localStorage.getItem('consultHistory');
+    const parsed = raw ? JSON.parse(raw) : [];
+    const isEmpty = !Array.isArray(parsed) || parsed.length === 0;
+    const hasStale = Array.isArray(parsed) && parsed.some((h) => STALE_KEYWORDS.test(h?.title || ''));
+    if (isEmpty || hasStale) {
+      localStorage.setItem('consultHistory', JSON.stringify(SAMPLE_CONSULT_HISTORY));
+      return SAMPLE_CONSULT_HISTORY;
+    }
+    return parsed;
+  } catch (_e) {
+    localStorage.setItem('consultHistory', JSON.stringify(SAMPLE_CONSULT_HISTORY));
+    return SAMPLE_CONSULT_HISTORY;
+  }
+}
 
 export default function MainPage() {
   const navigate = useNavigate();
@@ -11,7 +33,7 @@ export default function MainPage() {
     const u = localStorage.getItem('user');
     if (!u) { navigate('/login'); return; }
     setUser(JSON.parse(u));
-    setHistory(JSON.parse(localStorage.getItem('consultHistory') || '[]'));
+    setHistory(loadConsultHistory());
   }, [navigate]);
 
   const startNewConsult = () => {
@@ -28,7 +50,7 @@ export default function MainPage() {
   return (
     <div className="main-container">
       <nav className="main-nav">
-        <div className="nav-logo">📹 AI 약관 도우미</div>
+        <div className="nav-logo">🧪 연구실안전공제 도우미</div>
         <div className="nav-right">
           <span className="nav-user">👤 {user?.name}님</span>
           <button onClick={logout} className="btn-logout">로그아웃</button>
@@ -36,17 +58,17 @@ export default function MainPage() {
       </nav>
 
       <div className="main-hero">
-        <h1>AI 보험 약관 상담 시스템</h1>
-        <p>Gemini AI가 실시간으로 보험 약관을 분석하고 상담해드립니다</p>
+        <h1>연구실안전공제 AI 상담 시스템</h1>
+        <p>「연구실 안전환경 조성에 관한 법률」 제26조 기반 — Gemini AI가 약관·보상기준을 분석하고 상담해드립니다</p>
       </div>
 
       <div className="main-content">
         <div className="main-left">
           <div className="new-consult-card" onClick={startNewConsult}>
             <div className="plus-icon">+</div>
-            <h3>새로운 AI 상담 시작</h3>
-            <p>AI 기반 실시간 약관 상담을 시작하세요</p>
-            <button className="btn-start">새로운 AI 상담 방 생성 →</button>
+            <h3>새 연구실 사고 상담 시작</h3>
+            <p>화학·기계·감전·화재 등 사고 시나리오별 보장 범위 안내</p>
+            <button className="btn-start">새 상담 방 생성 →</button>
           </div>
 
           <div className="feature-list">
@@ -54,21 +76,21 @@ export default function MainPage() {
               <span>🤖</span>
               <div>
                 <strong>Gemini AI 실시간 분석</strong>
-                <p>약관 내용 즉시 요약 및 설명</p>
+                <p>연구실안전공제 약관·보상기준 즉시 요약</p>
               </div>
             </div>
             <div className="feature-item">
               <span>📄</span>
               <div>
-                <strong>약관 PDF 공유</strong>
-                <p>상담 중 약관 조항 직접 확인</p>
+                <strong>공제증서 PDF 공유</strong>
+                <p>상담 중 약관 조항 직접 인용</p>
               </div>
             </div>
             <div className="feature-item">
               <span>📊</span>
               <div>
-                <strong>상담 리포트 자동 생성</strong>
-                <p>종료 후 요약 보고서 저장</p>
+                <strong>청구 리포트 자동 생성</strong>
+                <p>요양·장해·유족·입원·장의비 항목별 정리</p>
               </div>
             </div>
           </div>

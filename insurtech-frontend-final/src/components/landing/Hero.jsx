@@ -70,7 +70,7 @@ export default function Hero() {
             className="lg:col-span-7"
           >
             <span className="inline-flex items-center gap-2 rounded-full bg-white/70 backdrop-blur border border-black/5 px-3 py-1.5 text-xs font-semibold text-brand-primary">
-              <CheckCircle2 size={14} /> 캠퍼스 안전관리 + 학생 단체보험
+              <CheckCircle2 size={14} /> 연구실 안전교육 + 연구실안전공제
             </span>
             <h1 className="mt-5 font-display font-extrabold text-4xl sm:text-5xl md:text-6xl leading-[1.05] tracking-tight whitespace-pre-line">
               {HERO.headline}
@@ -99,10 +99,10 @@ export default function Hero() {
                 <CheckCircle2 size={14} className="text-brand-secondary" /> 법정의무교육 자동화
               </li>
               <li className="inline-flex items-center gap-1.5">
-                <CheckCircle2 size={14} className="text-brand-secondary" /> 보험료 차등 적용
+                <CheckCircle2 size={14} className="text-brand-secondary" /> 공제료 차등 적용
               </li>
               <li className="inline-flex items-center gap-1.5">
-                <CheckCircle2 size={14} className="text-brand-secondary" /> 사고 청구 원클릭
+                <CheckCircle2 size={14} className="text-brand-secondary" /> 공제급여 청구 원클릭
               </li>
             </ul>
           </motion.div>

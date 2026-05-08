@@ -30,9 +30,9 @@ export const HEADER_AUTH = [
 export const HERO = {
   indicator: { current: '05', total: '12' },
   megaText: 'SAFE LAB',
-  headline: '안전한 실험실,\n안심하는 단체보험',
+  headline: '안전한 연구실,\n법정의무 연구실안전공제',
   subcopy:
-    '공대 실험실의 안전교육 이수부터 학생 단체보험 리스크 관리까지 — 인슈어테크가 한 번에 연결합니다.',
+    '연구실 안전교육 이수부터 「연구실 안전환경 조성에 관한 법률」 제26조 의무 가입까지 — 인슈어테크가 한국교육시설안전원 연구실안전공제를 한 번에 연결합니다.',
   ctaPrimary: { label: '무료 안전 진단 받기', to: '/device-check' },
   ctaSecondary: { label: '라인업 살펴보기', to: '#lineup' },
   // 이미지를 public/landing/safelab-hero.png 에 저장하면 자동 노출.
@@ -45,10 +45,10 @@ export const ABOUT = {
   eyebrow: 'About',
   title: '왜 인슈어테크인가',
   paragraphs: [
-    '현장 사고의 대부분은 예측 가능한 위험에서 발생합니다. 우리는 법정의무 안전교육 이수 데이터와 실험실 위험성 평가를 결합해, 학교 단위 단체보험 보험료를 합리적으로 재설계합니다.',
-    '교수·학생·학과 행정실 모두를 위한 대시보드를 제공합니다. 이수율은 자동으로 추적되고, 미이수자 알림과 보험 적용 범위가 실시간으로 동기화됩니다.',
+    '연구실 사고의 대부분은 예측 가능한 위험(화학약품·기계·감전·화재·추락)에서 발생합니다. 우리는 법정의무 안전교육 이수 데이터와 연구실 위험성 평가를 결합해, 「연구실 안전환경 조성에 관한 법률」제26조에 따른 연구실안전공제를 합리적으로 설계합니다.',
+    '연구주체의 장(교수·학과장)과 연구활동종사자(학생·연구원), 행정실 모두를 위한 대시보드를 제공합니다. 이수율은 자동으로 추적되고, 미이수자 알림과 공제 보장 범위(요양·장해·유족·입원·장의비)가 실시간으로 동기화됩니다.',
   ],
-  tags: ['법정의무교육', '위험성 평가', '이수율 추적', '단체보험 연계', '사고 리포트'],
+  tags: ['법정의무교육', '위험성 평가', '이수율 추적', '연구실안전공제', '사고 리포트'],
   cards: [
     {
       title: '맞춤 커리큘럼',
@@ -66,14 +66,14 @@ export const ABOUT = {
     },
     {
       title: '리스크 점수화',
-      desc: '실험실 단위 위험 등급으로 보험료 차등 적용',
+      desc: '연구실 단위 위험 등급으로 공제료 차등 적용',
       icon: 'Gauge',
       tone: 'accent',
       to: '/dashboard',
     },
     {
       title: '사고 대응 가이드',
-      desc: '사고 발생 시 보험 청구까지 원클릭',
+      desc: '연구실 사고 발생 시 공제급여 청구까지 원클릭',
       icon: 'LifeBuoy',
       tone: 'primary',
       to: '#contact',
@@ -103,21 +103,21 @@ export const LINEUP = {
     },
     {
       key: 'campusguard',
-      name: 'CampusGuard Insurance',
-      desc: '이수율 기반 학생 단체보험 플랜',
-      detail: '교육 이수율과 위험 점수를 바탕으로 보험료를 차등 설계합니다.',
+      name: 'CampusGuard Mutual',
+      desc: '이수율 기반 연구실안전공제 가입·청구',
+      detail: '「연구실 안전환경 조성에 관한 법률」제26조 의무 가입을 자동 관리. 요양·장해·유족·입원·장의비 5종 보장.',
       icon: 'ShieldCheck',
       gradient: 'from-pink-400 to-rose-500',
       pillBg: 'bg-pink-50',
       pillText: 'text-pink-700',
       to: '/register',
-      ctaLabel: '보험 상담 신청',
+      ctaLabel: '공제 가입 안내',
     },
     {
       key: 'riskradar',
       name: 'RiskRadar Dashboard',
-      desc: '실험실 위험 모니터링 + 사고 리포트',
-      detail: '학과 단위 위험 지표·미이수자·청구 현황을 한 화면에서 추적.',
+      desc: '연구실 위험 모니터링 + 사고 리포트',
+      detail: '연구실 단위 위험 지표·미이수자·공제급여 청구 현황을 한 화면에서 추적.',
       icon: 'Activity',
       gradient: 'from-yellow-300 to-amber-500',
       pillBg: 'bg-yellow-50',
@@ -132,7 +132,7 @@ export const CONTACT = {
   eyebrow: 'Contact',
   title: '지금 도입 문의하세요',
   subtitle:
-    '도입을 검토 중인 학교/학과 담당자분들을 위한 무료 컨설팅을 제공합니다. 영업일 기준 1일 이내 회신드립니다.',
+    '연구실안전공제 도입을 검토 중인 학과/연구기관 담당자분들을 위한 무료 컨설팅을 제공합니다. 영업일 기준 1일 이내 회신드립니다.',
   info: [
     { icon: 'Phone', label: '전화', value: '032-870-2114' },
     { icon: 'Mail', label: '이메일', value: 'hello@insuretech.lab' },
@@ -144,7 +144,7 @@ export const CONTACT = {
 
 export const FOOTER = {
   brand: '인슈어테크',
-  description: '안전교육과 학생 단체보험을 잇는 캠퍼스 리스크 플랫폼',
+  description: '연구실 안전교육과 연구실안전공제를 잇는 캠퍼스 리스크 플랫폼',
   columns: [
     {
       title: '서비스',
