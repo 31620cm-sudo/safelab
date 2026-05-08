@@ -134,7 +134,7 @@ export default function ConsultationRoomPage() {
       transcript: transcript, analysis: aiAnalysis, duration: elapsed
     });
     localStorage.setItem('consultHistory', JSON.stringify(history));
-    navigate(`/summary/${roomId}`);
+    navigate(`/insurance/summary/${roomId}`);
   };
 
   const statusColor = { connected: '#10b981', connecting: '#f59e0b', local_only: '#6b7280', disconnected: '#ef4444', error: '#ef4444' };

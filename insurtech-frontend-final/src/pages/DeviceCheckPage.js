@@ -1,5 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
+import AppShell from '../components/AppShell';
+import PageHeader from '../components/PageHeader';
 import './DeviceCheckPage.css';
 
 export default function DeviceCheckPage() {
@@ -11,46 +13,55 @@ export default function DeviceCheckPage() {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    checkDevices();
+    let mounted = true;
+    (async () => {
+      setLoading(true);
+      try {
+        const stream = await navigator.mediaDevices.getUserMedia({
+          video: true,
+          audio: true,
+        });
+        if (!mounted) {
+          stream.getTracks().forEach((t) => t.stop());
+          return;
+        }
+        if (videoRef.current) videoRef.current.srcObject = stream;
+        setCameraOk(true);
+        setMicOk(true);
+      } catch (err) {
+        if (!mounted) return;
+        setError('카메라 및 마이크 접근 권한을 허용해주세요.');
+        setCameraOk(false);
+        setMicOk(false);
+      }
+      if (mounted) setLoading(false);
+    })();
     return () => {
+      mounted = false;
       if (videoRef.current?.srcObject) {
-        videoRef.current.srcObject.getTracks().forEach(t => t.stop());
+        videoRef.current.srcObject.getTracks().forEach((t) => t.stop());
       }
     };
   }, []);
 
-  const checkDevices = async () => {
-    setLoading(true);
-    try {
-      const stream = await navigator.mediaDevices.getUserMedia({ video: true, audio: true });
-      if (videoRef.current) videoRef.current.srcObject = stream;
-      setCameraOk(true);
-      setMicOk(true);
-    } catch (err) {
-      setError('카메라 및 마이크 접근 권한을 허용해주세요.');
-      setCameraOk(false);
-      setMicOk(false);
-    }
-    setLoading(false);
-  };
-
   const enterRoom = () => {
     const roomId = localStorage.getItem('currentRoom') || 'room-' + Date.now();
+    localStorage.setItem('currentRoom', roomId);
     if (videoRef.current?.srcObject) {
-      videoRef.current.srcObject.getTracks().forEach(t => t.stop());
+      videoRef.current.srcObject.getTracks().forEach((t) => t.stop());
     }
-    navigate(`/room/${roomId}`);
+    navigate(`/insurance/room/${roomId}`);
   };
 
   return (
-    <div className="device-check-container">
-      <div className="device-check-card">
-        <div className="device-check-header">
-          <h1>AI 상담 시작 전 장치 체크</h1>
-          <p>카메라와 마이크가 정상적으로 작동하는지 확인해주세요.</p>
-        </div>
-
-        <div className="preview-area">
+    <AppShell variant="device-check-shell">
+      <PageHeader
+        title="AI 상담 장치 체크"
+        subtitle="카메라·마이크 권한을 허용해주세요"
+        backTo="/"
+      />
+      <div className="page-body">
+        <div className="media-block">
           {loading ? (
             <div className="preview-loading">장치 확인 중...</div>
           ) : error ? (
@@ -59,44 +70,60 @@ export default function DeviceCheckPage() {
               <p>{error}</p>
             </div>
           ) : (
-            <video ref={videoRef} autoPlay muted playsInline className="preview-video" />
+            <video
+              ref={videoRef}
+              autoPlay
+              muted
+              playsInline
+              className="preview-video"
+            />
           )}
-          <div className="preview-label">Live Preview</div>
         </div>
 
-        <div className="status-checks">
-          <h3>상태 체크</h3>
-          <div className="status-item">
-            <span className="status-icon">📷</span>
-            <span>카메라</span>
-            <span className={`status-badge ${cameraOk ? 'ok' : 'fail'}`}>
-              {cameraOk ? '✅ 정상 작동 중' : '❌ 권한 필요'}
-            </span>
+        <section className="glass-card">
+          <h3 className="card-title">상태 체크</h3>
+          <div className="status-list">
+            <div className="status-row">
+              <span className="status-row__label">📷 카메라</span>
+              <span className={`pill ${cameraOk ? 'pill-green' : 'pill-rose'}`}>
+                {cameraOk ? '정상 작동 중' : '권한 필요'}
+              </span>
+            </div>
+            <div className="status-row">
+              <span className="status-row__label">🎤 마이크</span>
+              <span className={`pill ${micOk ? 'pill-green' : 'pill-rose'}`}>
+                {micOk ? '정상 작동 중' : '권한 필요'}
+              </span>
+            </div>
           </div>
-          <div className="status-item">
-            <span className="status-icon">🎤</span>
-            <span>마이크</span>
-            <span className={`status-badge ${micOk ? 'ok' : 'fail'}`}>
-              {micOk ? '✅ 정상 작동 중' : '❌ 권한 필요'}
-            </span>
-          </div>
-        </div>
+        </section>
 
         {error && (
-          <div className="error-banner">
-            <span>⚠️</span> {error}
-          </div>
+          <div className="banner banner-warn">⚠️ {error}</div>
         )}
 
-        <p className="hint-text">카메라와 마이크가 정상적으로 작동하는지 확인 후 '입장하기' 버튼을 눌러주세요.</p>
+        <p className="hint-text">
+          카메라와 마이크가 정상적으로 작동하는지 확인 후 '입장하기' 버튼을 눌러주세요.
+        </p>
 
-        <div className="device-check-actions">
-          <button onClick={() => navigate('/main')} className="btn-secondary">취소</button>
-          <button onClick={enterRoom} className="btn-primary" disabled={!cameraOk || !micOk}>
+        <div className="action-row">
+          <button
+            type="button"
+            onClick={() => navigate(-1)}
+            className="t-btn t-btn-ghost"
+          >
+            취소
+          </button>
+          <button
+            type="button"
+            onClick={enterRoom}
+            className="t-btn t-btn-primary"
+            disabled={!cameraOk || !micOk}
+          >
             상담방 입장하기
           </button>
         </div>
       </div>
-    </div>
+    </AppShell>
   );
 }

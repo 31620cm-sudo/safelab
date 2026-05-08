@@ -1,7 +1,8 @@
-// NOTE: 인슈어테크 안전관리 컨셉. 푸드/스플래시 모티프는 사용하지 않습니다.
-// 카피/데이터 수정: src/data/landing.js
-// 컬러 토큰: src/index.css 의 :root CSS 변수
-// 격리: tailwind.config.js — content scope + important: '.landing-root' + preflight: false
+// SafeLab 외부 소개 랜딩.
+// - .app-shell + Aurora orb 4개로 다른 페이지와 동일한 배경 시스템 사용
+// - .mobile-frame 안에 컨텐츠를 두어 데스크톱에서도 휴대폰 앱처럼 보이게
+// - 안쪽에 .landing-root 를 두어 Tailwind 격리 스코프 진입 (important: '.landing-root')
+// 카피/데이터 수정: src/data/landing.js · 컬러 토큰: src/index.css :root
 import React from 'react';
 import Header from '../components/landing/Header';
 import Hero from '../components/landing/Hero';
@@ -14,15 +15,23 @@ import { ToastProvider } from '../hooks/useToast';
 export default function SafetyLandingPage() {
   return (
     <ToastProvider>
-      <div className="landing-root min-h-screen bg-bg-soft text-text-primary font-sans antialiased">
-        <Header />
-        <main>
-          <Hero />
-          <About />
-          <Lineup />
-          <ContactForm />
-        </main>
-        <Footer />
+      <div className="app-shell landing-shell-root">
+        <div className="aurora-orb o1" aria-hidden="true" />
+        <div className="aurora-orb o2" aria-hidden="true" />
+        <div className="aurora-orb o3" aria-hidden="true" />
+        <div className="aurora-orb o4" aria-hidden="true" />
+        <div className="mobile-frame">
+          <div className="landing-root font-sans antialiased">
+            <Header />
+            <main>
+              <Hero />
+              <About />
+              <Lineup />
+              <ContactForm />
+            </main>
+            <Footer />
+          </div>
+        </div>
       </div>
     </ToastProvider>
   );
