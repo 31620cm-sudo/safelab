@@ -24,7 +24,7 @@ export const HEADER_MENUS = [
 
 export const HEADER_AUTH = [
   { label: '로그인', to: '/login', variant: 'ghost' },
-  { label: '시작하기', to: '/register', variant: 'primary' },
+  { label: '시작하기', to: '/device-check', variant: 'primary' },
 ];
 
 export const HERO = {
@@ -33,7 +33,7 @@ export const HERO = {
   headline: '안전한 실험실,\n안심하는 단체보험',
   subcopy:
     '공대 실험실의 안전교육 이수부터 학생 단체보험 리스크 관리까지 — 인슈어테크가 한 번에 연결합니다.',
-  ctaPrimary: { label: '무료 안전 진단 받기', to: '/register' },
+  ctaPrimary: { label: '무료 안전 진단 받기', to: '/device-check' },
   ctaSecondary: { label: '라인업 살펴보기', to: '#lineup' },
   // 이미지를 public/landing/safelab-hero.png 에 저장하면 자동 노출.
   // 파일이 없으면 그라디언트 + 아이콘 fallback이 사용됩니다.
@@ -55,7 +55,7 @@ export const ABOUT = {
       desc: '학과별 위험요소에 맞춘 모듈형 안전교육 트랙',
       icon: 'GraduationCap',
       tone: 'primary',
-      to: '/main',
+      to: '/device-check',
     },
     {
       title: '이수 자동 인증',
@@ -95,7 +95,7 @@ export const LINEUP = {
       gradient: 'from-cyan-400 to-teal-600',
       pillBg: 'bg-cyan-50',
       pillText: 'text-cyan-700',
-      to: '/main',
+      to: '/device-check',
       ctaLabel: '교육 시작하기',
       // public/landing/safelab-dashboard.png 에 저장하면 자동 노출.
       image: '/landing/safelab-dashboard.png',

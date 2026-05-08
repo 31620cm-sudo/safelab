@@ -2,6 +2,7 @@
 module.exports = {
   content: [
     './src/pages/SafetyLandingPage.jsx',
+    './src/pages/DashboardPage.js',
     './src/components/landing/**/*.{js,jsx}',
     './src/hooks/useToast.js',
     './src/hooks/useScrollFadeUp.js',
