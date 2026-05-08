@@ -3,12 +3,14 @@
 @tailwind utilities;
 
 :root {
-  --brand-primary: #2563eb;
-  --brand-secondary: #0d9488;
-  --brand-accent: #f59e0b;
-  --bg-soft: #fafaf9;
-  --text-primary: #1a1a1a;
-  --text-muted: #6b7280;
+  /* SafeLab 일러스트 톤 — 시안 / 민트 / 옐로우 / 코럴 */
+  --brand-primary: #06b6d4;     /* cyan-500 — safelab 로고 박스 톤 */
+  --brand-secondary: #fbbf24;   /* yellow-400 — 후드/벽 톤 */
+  --brand-accent: #f472b6;      /* pink-400 — 코럴 박스 톤 */
+  --brand-mint: #4ade80;        /* green-400 — 캐비닛 민트 톤 */
+  --bg-soft: #f0fdfa;           /* teal-50 — 부드러운 시안 배경 */
+  --text-primary: #0f172a;      /* slate-900 — 짙은 차콜 */
+  --text-muted: #64748b;        /* slate-500 */
 }
 
 .landing-root {

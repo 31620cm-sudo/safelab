@@ -35,6 +35,10 @@ export const HERO = {
     '공대 실험실의 안전교육 이수부터 학생 단체보험 리스크 관리까지 — 인슈어테크가 한 번에 연결합니다.',
   ctaPrimary: { label: '무료 안전 진단 받기', to: '/register' },
   ctaSecondary: { label: '라인업 살펴보기', to: '#lineup' },
+  // 이미지를 public/landing/safelab-hero.png 에 저장하면 자동 노출.
+  // 파일이 없으면 그라디언트 + 아이콘 fallback이 사용됩니다.
+  image: '/landing/safelab-hero.png',
+  imageAlt: 'SafeLab 실험실 일러스트 — 후드, 아이워시, 비상 사이렌, 폐기물 분리',
 };
 
 export const ABOUT = {
@@ -88,11 +92,14 @@ export const LINEUP = {
       desc: '학과 맞춤형 온라인 안전교육',
       detail: '실험실/장비별 위험요소를 반영한 모듈형 강의 + 망각곡선 기반 반복 학습.',
       icon: 'BookOpenCheck',
-      gradient: 'from-blue-500 to-blue-700',
-      pillBg: 'bg-blue-50',
-      pillText: 'text-blue-700',
+      gradient: 'from-cyan-400 to-teal-600',
+      pillBg: 'bg-cyan-50',
+      pillText: 'text-cyan-700',
       to: '/main',
       ctaLabel: '교육 시작하기',
+      // public/landing/safelab-dashboard.png 에 저장하면 자동 노출.
+      image: '/landing/safelab-dashboard.png',
+      imageAlt: 'SafeLab 대시보드 UI 목업',
     },
     {
       key: 'campusguard',
@@ -100,9 +107,9 @@ export const LINEUP = {
       desc: '이수율 기반 학생 단체보험 플랜',
       detail: '교육 이수율과 위험 점수를 바탕으로 보험료를 차등 설계합니다.',
       icon: 'ShieldCheck',
-      gradient: 'from-rose-400 to-rose-600',
-      pillBg: 'bg-rose-50',
-      pillText: 'text-rose-700',
+      gradient: 'from-pink-400 to-rose-500',
+      pillBg: 'bg-pink-50',
+      pillText: 'text-pink-700',
       to: '/register',
       ctaLabel: '보험 상담 신청',
     },
@@ -112,9 +119,9 @@ export const LINEUP = {
       desc: '실험실 위험 모니터링 + 사고 리포트',
       detail: '학과 단위 위험 지표·미이수자·청구 현황을 한 화면에서 추적.',
       icon: 'Activity',
-      gradient: 'from-amber-400 to-amber-600',
-      pillBg: 'bg-amber-50',
-      pillText: 'text-amber-700',
+      gradient: 'from-yellow-300 to-amber-500',
+      pillBg: 'bg-yellow-50',
+      pillText: 'text-yellow-700',
       to: '/dashboard',
       ctaLabel: '대시보드 바로가기',
     },

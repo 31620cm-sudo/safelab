@@ -17,6 +17,7 @@ module.exports = {
           primary: 'var(--brand-primary)',
           secondary: 'var(--brand-secondary)',
           accent: 'var(--brand-accent)',
+          mint: 'var(--brand-mint)',
         },
         bg: {
           soft: 'var(--bg-soft)',
@@ -34,8 +35,8 @@ module.exports = {
         '3xl': '1.5rem',
       },
       boxShadow: {
-        glow: '0 10px 40px -10px rgba(37, 99, 235, 0.45)',
-        'glow-accent': '0 10px 40px -10px rgba(245, 158, 11, 0.45)',
+        glow: '0 10px 40px -10px rgba(6, 182, 212, 0.45)',
+        'glow-accent': '0 10px 40px -10px rgba(244, 114, 182, 0.45)',
       },
       keyframes: {
         floatY: {

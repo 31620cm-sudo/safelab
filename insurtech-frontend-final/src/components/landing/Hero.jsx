@@ -1,10 +1,12 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { ArrowRight, ShieldCheck, HardHat, ChevronLeft, ChevronRight, CheckCircle2 } from 'lucide-react';
 import SmartLink from './SmartLink';
 import { HERO } from '../../data/landing';
 
 export default function Hero() {
+  const [imgError, setImgError] = useState(false);
+  const showImage = HERO.image && !imgError;
   return (
     <section id="hero" className="relative overflow-hidden">
       {/* 배경 글로우 — 푸드 모티프 미사용, 추상 도형만 */}
@@ -112,37 +114,48 @@ export default function Hero() {
             className="lg:col-span-5"
           >
             <div className="relative">
-              {/* TODO: 실제 안전교육 일러스트/사진으로 교체 — public/landing/hero.png */}
               <div
                 role="img"
-                aria-label="안전모와 방패가 떠 있는 안전교육 이미지 placeholder"
-                className="relative aspect-square rounded-3xl bg-gradient-to-br from-brand-primary/15 via-white to-brand-secondary/15 border border-white shadow-xl overflow-hidden"
+                aria-label={HERO.imageAlt || '안전교육 비주얼'}
+                className="relative aspect-[4/3] rounded-3xl bg-gradient-to-br from-brand-primary/15 via-white to-brand-secondary/15 border border-white shadow-xl overflow-hidden"
               >
-                <div className="absolute inset-0 grid-dots opacity-60" aria-hidden="true" />
-                <div
-                  className="absolute -top-10 -right-10 h-48 w-48 rounded-full bg-brand-primary/30 blur-2xl"
-                  aria-hidden="true"
-                />
-                <div
-                  className="absolute -bottom-8 -left-8 h-44 w-44 rounded-full bg-brand-accent/30 blur-2xl"
-                  aria-hidden="true"
-                />
-                <div className="absolute inset-0 flex flex-col items-center justify-center gap-6">
-                  <div className="h-28 w-28 rounded-3xl bg-white/90 backdrop-blur border border-black/5 shadow-glow flex items-center justify-center animate-float-y">
-                    <ShieldCheck size={56} className="text-brand-primary" strokeWidth={2.2} />
-                  </div>
-                  <div className="flex items-center gap-3">
-                    <div className="h-16 w-16 rounded-2xl bg-white/90 border border-black/5 shadow flex items-center justify-center">
-                      <HardHat size={28} className="text-brand-accent" />
+                {showImage ? (
+                  <img
+                    src={process.env.PUBLIC_URL + HERO.image}
+                    alt={HERO.imageAlt || ''}
+                    onError={() => setImgError(true)}
+                    className="absolute inset-0 w-full h-full object-cover"
+                  />
+                ) : (
+                  <>
+                    {/* fallback: 이미지 파일이 public/landing/safelab-hero.png 에 저장되기 전까지 */}
+                    <div className="absolute inset-0 grid-dots opacity-60" aria-hidden="true" />
+                    <div
+                      className="absolute -top-10 -right-10 h-48 w-48 rounded-full bg-brand-primary/30 blur-2xl"
+                      aria-hidden="true"
+                    />
+                    <div
+                      className="absolute -bottom-8 -left-8 h-44 w-44 rounded-full bg-brand-accent/30 blur-2xl"
+                      aria-hidden="true"
+                    />
+                    <div className="absolute inset-0 flex flex-col items-center justify-center gap-6">
+                      <div className="h-28 w-28 rounded-3xl bg-white/90 backdrop-blur border border-black/5 shadow-glow flex items-center justify-center animate-float-y">
+                        <ShieldCheck size={56} className="text-brand-primary" strokeWidth={2.2} />
+                      </div>
+                      <div className="flex items-center gap-3">
+                        <div className="h-16 w-16 rounded-2xl bg-white/90 border border-black/5 shadow flex items-center justify-center">
+                          <HardHat size={28} className="text-brand-accent" />
+                        </div>
+                        <div className="h-16 w-16 rounded-2xl bg-brand-primary text-white shadow-glow flex items-center justify-center font-display font-extrabold">
+                          A+
+                        </div>
+                        <div className="h-16 w-16 rounded-2xl bg-white/90 border border-black/5 shadow flex items-center justify-center">
+                          <CheckCircle2 size={28} className="text-brand-secondary" />
+                        </div>
+                      </div>
                     </div>
-                    <div className="h-16 w-16 rounded-2xl bg-brand-primary text-white shadow-glow flex items-center justify-center font-display font-extrabold">
-                      A+
-                    </div>
-                    <div className="h-16 w-16 rounded-2xl bg-white/90 border border-black/5 shadow flex items-center justify-center">
-                      <CheckCircle2 size={28} className="text-brand-secondary" />
-                    </div>
-                  </div>
-                </div>
+                  </>
+                )}
               </div>
 
               {/* 보조 카드 — 통계 칩 */}
