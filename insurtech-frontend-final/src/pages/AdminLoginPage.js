@@ -23,6 +23,10 @@ export default function AdminLoginPage() {
 
   return (
     <div className="app-shell">
+      <div className="aurora-orb o1" />
+      <div className="aurora-orb o2" />
+      <div className="aurora-orb o3" />
+      <div className="aurora-orb o4" />
       <div className="mobile-frame al-frame">
         <div className="al-header">
           <button className="al-back" onClick={() => navigate('/')} aria-label="뒤로">←</button>

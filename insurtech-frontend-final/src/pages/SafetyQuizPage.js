@@ -35,6 +35,10 @@ export default function SafetyQuizPage() {
   if (!department || !scenario) {
     return (
       <div className="app-shell">
+      <div className="aurora-orb o1" />
+      <div className="aurora-orb o2" />
+      <div className="aurora-orb o3" />
+      <div className="aurora-orb o4" />
         <div className="mobile-frame">
           <div style={{ padding: 40, textAlign: 'center' }}>
             <p>퀴즈를 찾을 수 없습니다.</p>
@@ -101,6 +105,10 @@ export default function SafetyQuizPage() {
 
   return (
     <div className="app-shell">
+      <div className="aurora-orb o1" />
+      <div className="aurora-orb o2" />
+      <div className="aurora-orb o3" />
+      <div className="aurora-orb o4" />
       <div className="mobile-frame sq-frame">
         <div className="sq-header">
           <button className="sq-back" onClick={() => navigate(`/student/safety/${dept}`)} aria-label="뒤로">←</button>

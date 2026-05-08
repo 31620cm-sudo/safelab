@@ -32,6 +32,10 @@ export default function SafetyScenarioPage() {
   if (!department || !scenario) {
     return (
       <div className="app-shell">
+      <div className="aurora-orb o1" />
+      <div className="aurora-orb o2" />
+      <div className="aurora-orb o3" />
+      <div className="aurora-orb o4" />
         <div className="mobile-frame">
           <div style={{ padding: 40, textAlign: 'center' }}>
             <p>시나리오를 찾을 수 없습니다.</p>
@@ -65,6 +69,10 @@ export default function SafetyScenarioPage() {
 
   return (
     <div className="app-shell">
+      <div className="aurora-orb o1" />
+      <div className="aurora-orb o2" />
+      <div className="aurora-orb o3" />
+      <div className="aurora-orb o4" />
       <div className="mobile-frame ss-frame">
         <div className="ss-header">
           <button className="ss-back" onClick={() => navigate(`/student/safety/${dept}`)} aria-label="뒤로">←</button>

@@ -36,6 +36,10 @@ export default function SafetyMainPage() {
   if (!department) {
     return (
       <div className="app-shell">
+      <div className="aurora-orb o1" />
+      <div className="aurora-orb o2" />
+      <div className="aurora-orb o3" />
+      <div className="aurora-orb o4" />
         <div className="mobile-frame">
           <div style={{ padding: 40, textAlign: 'center' }}>
             <p>학과를 찾을 수 없습니다.</p>
@@ -55,6 +59,10 @@ export default function SafetyMainPage() {
 
   return (
     <div className="app-shell">
+      <div className="aurora-orb o1" />
+      <div className="aurora-orb o2" />
+      <div className="aurora-orb o3" />
+      <div className="aurora-orb o4" />
       <div className="mobile-frame sm-frame">
         <div className="sm-header">
           <button className="sm-back" onClick={() => navigate('/')} aria-label="처음으로">←</button>

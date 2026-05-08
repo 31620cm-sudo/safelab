@@ -24,6 +24,10 @@ export default function EmergencyPage() {
 
   return (
     <div className="app-shell">
+      <div className="aurora-orb o1" />
+      <div className="aurora-orb o2" />
+      <div className="aurora-orb o3" />
+      <div className="aurora-orb o4" />
       <div className="mobile-frame em-frame">
         <div className="em-header">
           <button className="em-back" onClick={() => navigate(-1)} aria-label="뒤로">←</button>

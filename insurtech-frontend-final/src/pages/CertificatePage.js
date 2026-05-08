@@ -39,6 +39,10 @@ export default function CertificatePage() {
   if (!allDone) {
     return (
       <div className="app-shell">
+      <div className="aurora-orb o1" />
+      <div className="aurora-orb o2" />
+      <div className="aurora-orb o3" />
+      <div className="aurora-orb o4" />
         <div className="mobile-frame">
           <div className="cert-not-yet">
             <div className="cert-not-yet-icon">📋</div>
@@ -55,6 +59,10 @@ export default function CertificatePage() {
 
   return (
     <div className="app-shell cert-shell">
+      <div className="aurora-orb o1" />
+      <div className="aurora-orb o2" />
+      <div className="aurora-orb o3" />
+      <div className="aurora-orb o4" />
       <div className="cert-toolbar no-print">
         <button className="t-btn t-btn-ghost" onClick={() => navigate(`/student/safety/${dept}`)}>← 돌아가기</button>
         <button className="t-btn t-btn-primary" onClick={() => window.print()}>🖨️ 인쇄/PDF 저장</button>

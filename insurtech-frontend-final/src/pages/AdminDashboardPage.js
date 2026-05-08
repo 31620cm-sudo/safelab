@@ -65,6 +65,10 @@ export default function AdminDashboardPage() {
 
   return (
     <div className="app-shell">
+      <div className="aurora-orb o1" />
+      <div className="aurora-orb o2" />
+      <div className="aurora-orb o3" />
+      <div className="aurora-orb o4" />
       <div className="ad-frame">
         <div className="ad-topbar">
           <div className="ad-brand">

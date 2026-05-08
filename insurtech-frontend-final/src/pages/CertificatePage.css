@@ -1,7 +1,9 @@
 .cert-shell {
-  background: #F5F5F7;
+  background: transparent;
   min-height: 100vh;
   padding: 24px 16px;
+  position: relative;
+  z-index: 1;
 }
 
 .cert-toolbar {
