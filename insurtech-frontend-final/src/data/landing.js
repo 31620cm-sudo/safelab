@@ -51,24 +51,28 @@ export const ABOUT = {
       desc: '학과별 위험요소에 맞춘 모듈형 안전교육 트랙',
       icon: 'GraduationCap',
       tone: 'primary',
+      to: '/main',
     },
     {
       title: '이수 자동 인증',
       desc: 'QR/SSO 기반 출석, 학생증 연동',
       icon: 'QrCode',
       tone: 'secondary',
+      to: '/login',
     },
     {
       title: '리스크 점수화',
       desc: '실험실 단위 위험 등급으로 보험료 차등 적용',
       icon: 'Gauge',
       tone: 'accent',
+      to: '/dashboard',
     },
     {
       title: '사고 대응 가이드',
       desc: '사고 발생 시 보험 청구까지 원클릭',
       icon: 'LifeBuoy',
       tone: 'primary',
+      to: '#contact',
     },
   ],
 };

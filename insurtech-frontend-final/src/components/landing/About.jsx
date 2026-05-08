@@ -1,6 +1,7 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { GraduationCap, QrCode, Gauge, LifeBuoy } from 'lucide-react';
+import { GraduationCap, QrCode, Gauge, LifeBuoy, ArrowUpRight } from 'lucide-react';
+import SmartLink from './SmartLink';
 import { ABOUT } from '../../data/landing';
 
 const ICONS = { GraduationCap, QrCode, Gauge, LifeBuoy };
@@ -78,22 +79,32 @@ export default function About() {
                 const sizeClass =
                   idx % 3 === 0 ? 'sm:row-span-1' : idx === 2 ? 'sm:translate-y-6' : '';
                 return (
-                  <article
+                  <SmartLink
                     key={card.title}
-                    className={`group relative overflow-hidden rounded-3xl p-6 md:p-7 border border-black/5 shadow-sm transition hover:-translate-y-1 hover:shadow-xl ${tone.bg} ${tone.text} ${sizeClass}`}
+                    to={card.to}
+                    aria-label={`${card.title} — ${card.desc}`}
+                    className={`group relative overflow-hidden rounded-3xl p-6 md:p-7 border border-black/5 shadow-sm transition hover:-translate-y-1 hover:shadow-xl block ${tone.bg} ${tone.text} ${sizeClass} no-underline`}
                   >
                     <div
                       aria-hidden="true"
                       className="absolute -top-10 -right-10 h-32 w-32 rounded-full bg-white/10 blur-2xl"
                     />
-                    <span
-                      className={`inline-flex h-11 w-11 items-center justify-center rounded-2xl ${tone.chipBg} ${tone.chipText}`}
-                    >
-                      <Icon size={20} strokeWidth={2.2} />
-                    </span>
+                    <div className="flex items-start justify-between">
+                      <span
+                        className={`inline-flex h-11 w-11 items-center justify-center rounded-2xl ${tone.chipBg} ${tone.chipText}`}
+                      >
+                        <Icon size={20} strokeWidth={2.2} />
+                      </span>
+                      <span
+                        className={`inline-flex h-9 w-9 items-center justify-center rounded-full ${tone.chipBg} ${tone.chipText} opacity-0 group-hover:opacity-100 transition`}
+                        aria-hidden="true"
+                      >
+                        <ArrowUpRight size={16} />
+                      </span>
+                    </div>
                     <h3 className="mt-4 font-display font-bold text-xl">{card.title}</h3>
                     <p className={`mt-2 text-sm leading-relaxed ${tone.sub}`}>{card.desc}</p>
-                  </article>
+                  </SmartLink>
                 );
               })}
             </div>
