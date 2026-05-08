@@ -5,6 +5,7 @@ import { analyzeConsultation } from '../services/gemini';
 import { detectRisks } from '../services/riskDetector';
 import { demoScripts } from '../data/demoScripts';
 import { speak, cancelSpeak } from '../services/tts';
+import AppShell from '../components/AppShell';
 import './ConsultationRoomPage.css';
 
 const AI_GREETING = "안녕하세요. 인하공전 학생 단체보험 AI 상담사 진아입니다. 실험실 사고, 실습 중 부상, 기자재 파손, 현장실습 상해 등 어떤 상황이든 편하게 말씀해 주세요.";
@@ -141,7 +142,8 @@ export default function ConsultationRoomPage() {
   const statusLabel = { connected: '연결됨', connecting: '연결 중...', local_only: '로컬 모드', disconnected: '연결 끊김', error: '오류' };
 
   return (
-    <div className="room-wrap">
+    <AppShell variant="room-shell" noFrame>
+      <div className="room-wrap">
       {/* ── 좌: PDF 약관 패널 ── */}
       {showPdf && (
         <aside className="panel-pdf">
@@ -343,6 +345,7 @@ export default function ConsultationRoomPage() {
           {isAnalyzing ? '분석 중...' : '✦ AI 전체 분석 실행'}
         </button>
       </aside>
-    </div>
+      </div>
+    </AppShell>
   );
 }
