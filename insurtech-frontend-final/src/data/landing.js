@@ -5,13 +5,24 @@
 //   '/route'   → React Router SPA 이동 (<Link>)
 //   'http://'  → 외부 링크 (새 탭)
 //
-// 기존 앱 라우트 참고:
-//   /login /register /main /device-check /room/:roomId /summary/:roomId /dashboard
-// 카피·메뉴·태그·라인업·연락처를 여기에서만 수정하세요.
+// Inner 앱 라우트 (src/App.js):
+//   /                                     EntryPage (진입 분기)
+//   /landing                              SafetyLandingPage (이 페이지)
+//   /student/department                   DepartmentSelectPage (학과 선택)
+//   /student/safety/:dept                 SafetyMainPage (학과별 안전교육 허브)
+//   /student/safety/:dept/scenario/:sid   SafetyScenarioPage
+//   /student/safety/:dept/quiz/:sid       SafetyQuizPage  ← 학과별 퀴즈
+//   /student/safety/:dept/certificate     CertificatePage ← 이수증
+//   /admin/login                          AdminLoginPage
+//   /admin                                AdminDashboardPage (관리자 대시보드)
+//   /emergency                            EmergencyPage (긴급 연락)
+//   /insurance/consult                    DeviceCheckPage (보험 상담 시작)
+//   /insurance/room/:roomId               ConsultationRoomPage
+//   /insurance/summary/:roomId            SummaryPage
 
 export const BRAND = {
-  name: '인슈어테크',
-  enName: 'INSURETECH',
+  name: 'SafeLab',
+  enName: 'SAFELAB',
   tagline: 'Safer Lab, Safer Tomorrow',
   homeTo: '#hero',
 };
@@ -19,12 +30,12 @@ export const BRAND = {
 export const HEADER_MENUS = [
   { label: '서비스 소개', to: '#about' },
   { label: '라인업', to: '#lineup' },
-  { label: '대시보드', to: '/dashboard' },
+  { label: '관리자', to: '/admin/login' },
 ];
 
 export const HEADER_AUTH = [
-  { label: '로그인', to: '/login', variant: 'ghost' },
-  { label: '시작하기', to: '/device-check', variant: 'primary' },
+  { label: '관리자 로그인', to: '/admin/login', variant: 'ghost' },
+  { label: '학생 시작하기', to: '/student/department', variant: 'primary' },
 ];
 
 export const HERO = {
@@ -32,8 +43,8 @@ export const HERO = {
   megaText: 'SAFE LAB',
   headline: '안전한 연구실,\n법정의무 연구실안전공제',
   subcopy:
-    '연구실 안전교육 이수부터 「연구실 안전환경 조성에 관한 법률」 제26조 의무 가입까지 — 인슈어테크가 한국교육시설안전원 연구실안전공제를 한 번에 연결합니다.',
-  ctaPrimary: { label: '무료 안전 진단 받기', to: '/device-check' },
+    '연구실 안전교육 이수부터 「연구실 안전환경 조성에 관한 법률」 제26조 의무 가입까지 — SafeLab이 한국교육시설안전원 연구실안전공제를 한 번에 연결합니다.',
+  ctaPrimary: { label: '학과별 안전교육 시작', to: '/student/department' },
   ctaSecondary: { label: '라인업 살펴보기', to: '#lineup' },
   // 이미지를 public/landing/safelab-hero.png 에 저장하면 자동 노출.
   // 파일이 없으면 그라디언트 + 아이콘 fallback이 사용됩니다.
@@ -43,40 +54,40 @@ export const HERO = {
 
 export const ABOUT = {
   eyebrow: 'About',
-  title: '왜 인슈어테크인가',
+  title: '왜 SafeLab인가',
   paragraphs: [
-    '연구실 사고의 대부분은 예측 가능한 위험(화학약품·기계·감전·화재·추락)에서 발생합니다. 우리는 법정의무 안전교육 이수 데이터와 연구실 위험성 평가를 결합해, 「연구실 안전환경 조성에 관한 법률」제26조에 따른 연구실안전공제를 합리적으로 설계합니다.',
-    '연구주체의 장(교수·학과장)과 연구활동종사자(학생·연구원), 행정실 모두를 위한 대시보드를 제공합니다. 이수율은 자동으로 추적되고, 미이수자 알림과 공제 보장 범위(요양·장해·유족·입원·장의비)가 실시간으로 동기화됩니다.',
+    '연구실 사고의 대부분은 예측 가능한 위험(화학약품·기계·감전·화재·추락)에서 발생합니다. SafeLab은 학과별 위험요소에 맞춘 법정의무 안전교육과 「연구실 안전환경 조성에 관한 법률」제26조 연구실안전공제를 하나의 흐름으로 연결합니다.',
+    '학생(연구활동종사자)은 학과별 시나리오·퀴즈로 이수증을 발급받고, 관리자(연구주체의 장)는 대시보드에서 이수율·미이수자·사고 리포트를 한눈에 추적합니다. 사고 발생 시에는 공제급여(요양·장해·유족·입원·장의비) 청구로 즉시 이어집니다.',
   ],
-  tags: ['법정의무교육', '위험성 평가', '이수율 추적', '연구실안전공제', '사고 리포트'],
+  tags: ['법정의무교육', '학과별 시나리오', '학과별 퀴즈', '이수증 발급', '연구실안전공제'],
   cards: [
     {
-      title: '맞춤 커리큘럼',
-      desc: '학과별 위험요소에 맞춘 모듈형 안전교육 트랙',
+      title: '학과별 맞춤 커리큘럼',
+      desc: '화공·기계·전기·바이오 등 학과 위험요소에 맞춘 시나리오와 퀴즈',
       icon: 'GraduationCap',
       tone: 'primary',
-      to: '/device-check',
+      to: '/student/department',
     },
     {
-      title: '이수 자동 인증',
-      desc: 'QR/SSO 기반 출석, 학생증 연동',
+      title: '이수증 자동 발급',
+      desc: '시나리오 + 퀴즈 통과 시 학생증 연동 이수증을 즉시 발급',
       icon: 'QrCode',
       tone: 'secondary',
-      to: '/login',
+      to: '/student/department',
     },
     {
-      title: '리스크 점수화',
-      desc: '연구실 단위 위험 등급으로 공제료 차등 적용',
+      title: '리스크 모니터링',
+      desc: '학과·연구실 단위 위험 등급, 이수율, 사고 리포트를 관리자 대시보드에서',
       icon: 'Gauge',
       tone: 'accent',
-      to: '/dashboard',
+      to: '/admin/login',
     },
     {
-      title: '사고 대응 가이드',
-      desc: '연구실 사고 발생 시 공제급여 청구까지 원클릭',
+      title: '긴급 대응 가이드',
+      desc: '학과별 응급 연락처와 사고 발생 시 공제급여 청구 안내',
       icon: 'LifeBuoy',
       tone: 'primary',
-      to: '#contact',
+      to: '/emergency',
     },
   ],
 };
@@ -84,46 +95,45 @@ export const ABOUT = {
 export const LINEUP = {
   eyebrow: 'Lineup',
   title: '세 가지 핵심 솔루션',
-  subtitle: '안전교육 · 단체보험 · 리스크 모니터링이 하나로 이어집니다.',
+  subtitle: '학과별 안전교육 · 연구실안전공제 · 관리자 모니터링이 하나로 이어집니다.',
   items: [
     {
       key: 'safelab',
       name: 'SafeLab Education',
-      desc: '학과 맞춤형 온라인 안전교육',
-      detail: '실험실/장비별 위험요소를 반영한 모듈형 강의 + 망각곡선 기반 반복 학습.',
+      desc: '학과 맞춤형 시나리오 + 퀴즈',
+      detail: '화공·기계·전기·바이오 등 학과별 위험요소를 반영한 시나리오와 퀴즈로 이수증까지 한번에.',
       icon: 'BookOpenCheck',
       gradient: 'from-cyan-400 to-teal-600',
       pillBg: 'bg-cyan-50',
       pillText: 'text-cyan-700',
-      to: '/device-check',
-      ctaLabel: '교육 시작하기',
-      // public/landing/safelab-dashboard.png 에 저장하면 자동 노출.
+      to: '/student/department',
+      ctaLabel: '학과 선택하고 시작',
       image: '/landing/safelab-dashboard.png',
       imageAlt: 'SafeLab 대시보드 UI 목업',
     },
     {
       key: 'campusguard',
       name: 'CampusGuard Mutual',
-      desc: '이수율 기반 연구실안전공제 가입·청구',
-      detail: '「연구실 안전환경 조성에 관한 법률」제26조 의무 가입을 자동 관리. 요양·장해·유족·입원·장의비 5종 보장.',
+      desc: '연구실안전공제 상담·청구',
+      detail: '「연구실 안전환경 조성에 관한 법률」제26조 의무 가입. 요양·장해·유족·입원·장의비 5종 보장 — Gemini AI 약관 분석 상담실.',
       icon: 'ShieldCheck',
       gradient: 'from-pink-400 to-rose-500',
       pillBg: 'bg-pink-50',
       pillText: 'text-pink-700',
-      to: '/register',
-      ctaLabel: '공제 가입 안내',
+      to: '/insurance/consult',
+      ctaLabel: '공제 상담 시작',
     },
     {
       key: 'riskradar',
-      name: 'RiskRadar Dashboard',
-      desc: '연구실 위험 모니터링 + 사고 리포트',
-      detail: '연구실 단위 위험 지표·미이수자·공제급여 청구 현황을 한 화면에서 추적.',
+      name: 'RiskRadar Admin',
+      desc: '관리자 대시보드 + 사고 리포트',
+      detail: '학과·연구실 단위 위험 지표·이수율·미이수자·공제급여 청구 현황을 한 화면에서 추적.',
       icon: 'Activity',
       gradient: 'from-yellow-300 to-amber-500',
       pillBg: 'bg-yellow-50',
       pillText: 'text-yellow-700',
-      to: '/dashboard',
-      ctaLabel: '대시보드 바로가기',
+      to: '/admin/login',
+      ctaLabel: '관리자 로그인',
     },
   ],
 };
@@ -135,16 +145,16 @@ export const CONTACT = {
     '연구실안전공제 도입을 검토 중인 학과/연구기관 담당자분들을 위한 무료 컨설팅을 제공합니다. 영업일 기준 1일 이내 회신드립니다.',
   info: [
     { icon: 'Phone', label: '전화', value: '032-870-2114' },
-    { icon: 'Mail', label: '이메일', value: 'hello@insuretech.lab' },
+    { icon: 'Mail', label: '이메일', value: 'hello@safelab.kr' },
     { icon: 'MapPin', label: '주소', value: '인천광역시 남구 인하로 100, 인하공업전문대학' },
-    { icon: 'MessageCircle', label: '카카오 채널', value: '@인슈어테크' },
+    { icon: 'MessageCircle', label: '카카오 채널', value: '@SafeLab' },
   ],
   submitLabel: '신청하기',
 };
 
 export const FOOTER = {
-  brand: '인슈어테크',
-  description: '연구실 안전교육과 연구실안전공제를 잇는 캠퍼스 리스크 플랫폼',
+  brand: 'SafeLab',
+  description: '연구실 안전교육과 연구실안전공제를 잇는 캠퍼스 리스크 플랫폼 (인슈어테크 팀)',
   columns: [
     {
       title: '서비스',
@@ -157,10 +167,10 @@ export const FOOTER = {
     {
       title: '바로가기',
       links: [
-        { label: '로그인', to: '/login' },
-        { label: '회원가입', to: '/register' },
-        { label: '메인 홈', to: '/main' },
-        { label: '대시보드', to: '/dashboard' },
+        { label: '학생 시작하기', to: '/student/department' },
+        { label: '보험 상담', to: '/insurance/consult' },
+        { label: '관리자 로그인', to: '/admin/login' },
+        { label: '긴급 연락처', to: '/emergency' },
       ],
     },
   ],
@@ -169,5 +179,5 @@ export const FOOTER = {
     { icon: 'Youtube', label: 'YouTube', to: 'https://youtube.com' },
     { icon: 'MessageCircle', label: 'KakaoTalk', to: '#contact' },
   ],
-  copyright: '© 2026 인슈어테크. 인하공업전문대학 경진대회 출품.',
+  copyright: '© 2026 SafeLab — 인슈어테크 팀, 인하공업전문대학 경진대회 출품.',
 };

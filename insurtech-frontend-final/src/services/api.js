@@ -52,4 +52,14 @@ export const geminiApi = {
   }
 };
 
+// ─────────────────────────────────────────────────────────
+// 안전교육 (SafetyController 연동)
+// 백엔드 미가동/실패 시 throw — 호출 측에서 silent fallback 처리.
+// ─────────────────────────────────────────────────────────
+export const safetyApi = {
+  getCourse: (deptId) => api.get(`/safety/courses/${deptId}`),
+  recordAttempt: (payload) => api.post('/safety/attempts', payload),
+  getAdminProgress: () => api.get('/safety/admin/progress'),
+};
+
 export default api;

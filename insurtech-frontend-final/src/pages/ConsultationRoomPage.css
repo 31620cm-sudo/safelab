@@ -27,6 +27,33 @@
 
 .remote-area { flex:1; position:relative; display:flex; align-items:center; justify-content:center; overflow:hidden; }
 .video-remote { width:100%; height:100%; object-fit:cover; }
+.video-remote.hidden { display:none; }
+
+/* AI 아바타 스테이지 */
+.ai-avatar-area { background:radial-gradient(circle at 50% 40%, #1e3a8a 0%, #0f172a 70%); }
+.ai-avatar-stage { position:relative; display:flex; flex-direction:column; align-items:center; gap:16px; }
+.ai-avatar-ring { position:absolute; top:50%; left:50%; border-radius:50%; border:2px solid rgba(96,165,250,0.35); transform:translate(-50%,-50%); pointer-events:none; opacity:0; }
+.ai-avatar-stage.speaking .ai-avatar-ring { animation:ai-ring 2s ease-out infinite; }
+.ring-1 { width:200px; height:200px; animation-delay:0s !important; }
+.ring-2 { width:200px; height:200px; animation-delay:0.6s !important; }
+.ring-3 { width:200px; height:200px; animation-delay:1.2s !important; }
+@keyframes ai-ring { 0%{ width:200px; height:200px; opacity:0.7; } 100%{ width:380px; height:380px; opacity:0; } }
+.ai-avatar-circle { width:200px; height:200px; border-radius:50%; background:linear-gradient(135deg, #3b82f6, #1e3a8a); box-shadow:0 12px 40px rgba(59,130,246,0.45), inset 0 -10px 30px rgba(0,0,0,0.3); display:flex; flex-direction:column; align-items:center; justify-content:center; position:relative; z-index:2; transition:transform 0.2s; }
+.ai-avatar-stage.speaking .ai-avatar-circle { transform:scale(1.04); box-shadow:0 12px 50px rgba(59,130,246,0.7), inset 0 -10px 30px rgba(0,0,0,0.3); }
+.ai-avatar-face { font-size:86px; line-height:1; user-select:none; }
+.ai-avatar-mouth { width:30px; height:4px; border-radius:4px; background:#0f172a; margin-top:4px; opacity:0.6; transition:all 0.12s; }
+.ai-avatar-mouth.talking { animation:ai-mouth 0.28s ease-in-out infinite alternate; }
+@keyframes ai-mouth { from{ width:20px; height:4px; } to{ width:34px; height:12px; } }
+.ai-avatar-label { text-align:center; }
+.ai-avatar-name { font-size:18px; font-weight:700; color:#f1f5f9; letter-spacing:0.5px; }
+.ai-avatar-role { font-size:12px; color:#94a3b8; margin-top:3px; }
+
+/* 말풍선 */
+.ai-speech-bubble { position:absolute; bottom:100px; left:50%; transform:translateX(-50%); max-width:70%; padding:12px 18px; background:rgba(255,255,255,0.95); color:#0f172a; border-radius:14px; font-size:13px; line-height:1.55; box-shadow:0 10px 30px rgba(0,0,0,0.3); animation:bubble-in 0.25s ease-out; }
+.ai-speech-bubble::before { content:''; position:absolute; top:-8px; left:50%; transform:translateX(-50%); width:0; height:0; border-left:8px solid transparent; border-right:8px solid transparent; border-bottom:8px solid rgba(255,255,255,0.95); }
+.speech-dot { display:inline-block; width:8px; height:8px; background:#10b981; border-radius:50%; margin-right:6px; animation:speech-pulse 0.8s ease-in-out infinite; }
+@keyframes bubble-in { from{ opacity:0; transform:translate(-50%, 6px); } to{ opacity:1; transform:translate(-50%, 0); } }
+@keyframes speech-pulse { 0%,100%{ transform:scale(1); opacity:1; } 50%{ transform:scale(1.4); opacity:0.6; } }
 .waiting-overlay { position:absolute; text-align:center; color:#94a3b8; }
 .waiting-avatar { font-size:72px; margin-bottom:12px; }
 .waiting-overlay p { font-size:16px; margin-bottom:4px; color:#cbd5e1; }
@@ -88,3 +115,26 @@
 .btn-analyze-full { margin:10px; padding:12px; background:#1d4ed8; color:white; border:none; border-radius:8px; font-size:14px; font-weight:600; cursor:pointer; }
 .btn-analyze-full:hover { background:#1e40af; }
 .btn-analyze-full:disabled { background:#334155; opacity:0.5; cursor:not-allowed; }
+
+/* 시연용 시나리오 드롭다운 */
+.demo-preset-select { margin-left:auto; background:#1e3a8a; color:#e0e7ff; border:1px solid #3b82f6; border-radius:6px; padding:4px 10px; font-size:12px; cursor:pointer; font-family:inherit; max-width:220px; }
+.demo-preset-select:hover { background:#1e40af; }
+.demo-preset-select option { background:#1e293b; color:#e2e8f0; }
+
+/* 분석 결과 소스 배지 */
+.source-badge { display:inline-block; margin-left:8px; padding:2px 8px; border-radius:12px; font-size:10px; font-weight:600; vertical-align:middle; }
+.source-mock { background:#065f46; color:#6ee7b7; }
+.source-ai { background:#1e3a8a; color:#93c5fd; }
+.source-fallback { background:#44403c; color:#d6d3d1; }
+
+/* 위험 키워드 알림 */
+.risk-alert-stack { position:absolute; top:48px; left:50%; transform:translateX(-50%); display:flex; flex-direction:column; gap:6px; z-index:20; pointer-events:none; max-width:90%; }
+.risk-alert { display:flex; align-items:center; gap:10px; padding:8px 14px; border-radius:8px; font-size:13px; font-weight:500; color:white; box-shadow:0 4px 12px rgba(0,0,0,0.4); animation:risk-slide-in 0.3s ease-out; }
+.risk-high { background:linear-gradient(90deg, #991b1b, #dc2626); border:1px solid #fca5a5; }
+.risk-medium { background:linear-gradient(90deg, #b45309, #d97706); border:1px solid #fcd34d; }
+.risk-low { background:linear-gradient(90deg, #1e40af, #2563eb); border:1px solid #93c5fd; }
+.risk-icon { font-size:16px; }
+.risk-msg { font-weight:600; }
+.risk-kw { background:rgba(0,0,0,0.35); padding:1px 8px; border-radius:10px; font-size:11px; font-family:monospace; }
+.risk-time { font-size:10px; opacity:0.85; margin-left:auto; }
+@keyframes risk-slide-in { from{ transform:translateY(-10px); opacity:0; } to{ transform:translateY(0); opacity:1; } }
