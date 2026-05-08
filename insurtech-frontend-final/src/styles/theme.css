@@ -180,9 +180,10 @@ body {
   66%        { transform: translate(-30px, 40px) scale(0.95); }
 }
 
-/* mobile frame은 좁게 */
+/* 페이지 frame — 데스크톱 웹 폭으로 통일 (앱 frame 인상 제거).
+   기존 클래스명은 유지(많은 페이지가 .mobile-frame 직참조)하되 폭만 확장. */
 .mobile-frame {
-  max-width: var(--max-mobile);
+  max-width: var(--max-content);   /* 1240px */
   margin: 0 auto;
   background: transparent;
   min-height: 100vh;
