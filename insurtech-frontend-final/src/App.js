@@ -10,6 +10,7 @@ import SafetyScenarioPage from './pages/SafetyScenarioPage';
 import SafetyQuizPage from './pages/SafetyQuizPage';
 import CertificatePage from './pages/CertificatePage';
 import EmergencyPage from './pages/EmergencyPage';
+import IncidentPhotoPage from './pages/IncidentPhotoPage';
 import EmergencyFab from './components/EmergencyFab';
 
 // 보험 부분 — "이후로 분리" 요구에 맞춰 별도 라우트로 유지
@@ -36,8 +37,9 @@ function App() {
         <Route path="/student/safety/:dept/quiz/:sid" element={<SafetyQuizPage />} />
         <Route path="/student/safety/:dept/certificate" element={<CertificatePage />} />
 
-        {/* 긴급 */}
+        {/* 긴급 + 사진 사고 신고 */}
         <Route path="/emergency" element={<EmergencyPage />} />
+        <Route path="/incident/photo" element={<IncidentPhotoPage />} />
 
         {/* 보험 부분 (분리 모듈) */}
         <Route path="/insurance/consult" element={<DeviceCheckPage />} />

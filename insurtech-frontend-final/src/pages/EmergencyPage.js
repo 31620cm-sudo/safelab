@@ -37,7 +37,15 @@ export default function EmergencyPage() {
             <h1>긴급 연락처</h1>
             <p>사고 발생 시 — 위에서부터 순서대로 연락하세요</p>
           </div>
-          <div className="em-header__right" />
+          <button
+            type="button"
+            className="em-header__photo"
+            onClick={() => navigate('/incident/photo')}
+            title="사진으로 사고 신고"
+            aria-label="사진으로 사고 신고"
+          >
+            📷
+          </button>
         </header>
 
         <main className="em-main">
