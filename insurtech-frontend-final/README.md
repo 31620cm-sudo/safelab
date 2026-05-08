@@ -39,6 +39,7 @@ gradlew.bat bootRun     # Windows
 /admin/login                     관리자 로그인 (admin / admin1234)
 /admin                           학생 이수 현황 + 안전 대시보드
 /emergency                       학과별·공통 긴급연락처 (우하단 빨간 FAB)
+/incident/photo                  사진 → AI 사고 인식 + 즉시 조치 + 약관 매핑
 /insurance/consult               「연구실안전공제」 AI 상담 (장치 체크)
 /insurance/room/:roomId          상담실
 /insurance/summary/:roomId       상담 종료 요약
