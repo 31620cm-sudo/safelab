@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { analyzeIncidentPhoto } from '../services/incidentVision';
 import './IncidentPhotoPage.css';
@@ -6,12 +6,19 @@ import './IncidentPhotoPage.css';
 export default function IncidentPhotoPage() {
   const navigate = useNavigate();
   const fileRef = useRef(null);
+  const videoRef = useRef(null);
+  const streamRef = useRef(null);
 
   const [file, setFile] = useState(null);
   const [previewUrl, setPreviewUrl] = useState('');
   const [phase, setPhase] = useState('idle'); // idle | analyzing | result | error
   const [result, setResult] = useState(null);
   const [error, setError] = useState('');
+  const [cameraOn, setCameraOn] = useState(false);
+  const [camStarting, setCamStarting] = useState(false);
+
+  // 페이지 떠날 때 카메라 정리
+  useEffect(() => () => stopCamera(), []);
 
   const onPick = (e) => {
     const f = e.target.files?.[0];
@@ -31,6 +38,69 @@ export default function IncidentPhotoPage() {
     setError('');
     setPhase('idle');
     if (fileRef.current) fileRef.current.value = '';
+  };
+
+  const startCamera = async () => {
+    setError('');
+    setCamStarting(true);
+    try {
+      const stream = await navigator.mediaDevices.getUserMedia({
+        video: { facingMode: { ideal: 'environment' }, width: { ideal: 1280 } },
+        audio: false,
+      });
+      streamRef.current = stream;
+      setCameraOn(true);
+      // video element는 useEffect 패턴 대신 다음 tick 에 srcObject 설정
+      requestAnimationFrame(() => {
+        if (videoRef.current) {
+          videoRef.current.srcObject = stream;
+          videoRef.current.play().catch(() => {});
+        }
+      });
+    } catch (err) {
+      setError(
+        err?.name === 'NotAllowedError'
+          ? '카메라 접근이 차단되었습니다. 브라우저 권한을 허용해주세요.'
+          : '카메라를 사용할 수 없습니다. (' + (err?.message || err) + ')'
+      );
+    } finally {
+      setCamStarting(false);
+    }
+  };
+
+  function stopCamera() {
+    if (streamRef.current) {
+      streamRef.current.getTracks().forEach((t) => t.stop());
+      streamRef.current = null;
+    }
+    if (videoRef.current) videoRef.current.srcObject = null;
+    setCameraOn(false);
+  }
+
+  const capturePhoto = () => {
+    const video = videoRef.current;
+    if (!video || !video.videoWidth) return;
+    const canvas = document.createElement('canvas');
+    canvas.width = video.videoWidth;
+    canvas.height = video.videoHeight;
+    canvas
+      .getContext('2d')
+      .drawImage(video, 0, 0, canvas.width, canvas.height);
+    canvas.toBlob(
+      (blob) => {
+        if (!blob) return;
+        const fileName = `incident-${Date.now()}.jpg`;
+        const f = new File([blob], fileName, { type: 'image/jpeg' });
+        setFile(f);
+        setPreviewUrl(URL.createObjectURL(f));
+        setResult(null);
+        setError('');
+        setPhase('idle');
+        stopCamera();
+      },
+      'image/jpeg',
+      0.92
+    );
   };
 
   const analyze = async () => {
@@ -56,27 +126,41 @@ export default function IncidentPhotoPage() {
 
       <div className="ip-frame">
         <header className="ip-header">
-          <button className="ip-back" onClick={() => navigate(-1)} aria-label="뒤로">
+          <button
+            className="ip-back"
+            onClick={() => {
+              stopCamera();
+              navigate(-1);
+            }}
+            aria-label="뒤로"
+          >
             ←
           </button>
           <div className="ip-header__title">
             <h1>사진으로 사고 신고</h1>
-            <p>현장 사진을 올리면 AI가 사고 유형을 인식해 즉시 조치 단계와 약관을 안내합니다</p>
+            <p>
+              현장 사진을 올리면 AI가 사고 유형을 인식해 즉시 조치 단계와 약관을 안내합니다
+            </p>
           </div>
           <div className="ip-header__right" />
         </header>
 
         <main className="ip-main">
-          {/* ── 업로드 영역 ── */}
+          {/* ── 업로드 / 카메라 영역 ── */}
           {phase !== 'result' && (
             <section className="ip-section">
               <div className="ip-section__head">
                 <span className="eyebrow">Step 1</span>
                 <h2>사고 현장 사진</h2>
-                <p>카메라로 찍거나 갤러리에서 선택하세요. 최대 10MB.</p>
+                <p>웹캠으로 바로 촬영하거나, 갤러리에서 사진을 선택하세요.</p>
               </div>
 
-              <div className={`ip-dropzone ${previewUrl ? 'has-image' : ''}`}>
+              <div
+                className={`ip-dropzone ${previewUrl ? 'has-image' : ''} ${
+                  cameraOn ? 'is-camera' : ''
+                }`}
+              >
+                {/* hidden file input — 갤러리 선택용 */}
                 <input
                   ref={fileRef}
                   type="file"
@@ -87,9 +171,47 @@ export default function IncidentPhotoPage() {
                   aria-label="사진 업로드"
                 />
 
-                {previewUrl ? (
+                {cameraOn ? (
+                  <div className="ip-camera">
+                    <video
+                      ref={videoRef}
+                      className="ip-camera__video"
+                      autoPlay
+                      muted
+                      playsInline
+                    />
+                    <div className="ip-camera__guide">
+                      <span className="ip-camera__corner tl" />
+                      <span className="ip-camera__corner tr" />
+                      <span className="ip-camera__corner bl" />
+                      <span className="ip-camera__corner br" />
+                    </div>
+                    <div className="ip-camera__bar">
+                      <button
+                        type="button"
+                        className="ip-camera__cancel"
+                        onClick={stopCamera}
+                      >
+                        취소
+                      </button>
+                      <button
+                        type="button"
+                        className="ip-camera__shutter"
+                        onClick={capturePhoto}
+                        aria-label="촬영"
+                      >
+                        <span />
+                      </button>
+                      <span className="ip-camera__hint">📸 화면을 터치/클릭으로 촬영</span>
+                    </div>
+                  </div>
+                ) : previewUrl ? (
                   <>
-                    <img className="ip-preview" src={previewUrl} alt="업로드한 사고 사진" />
+                    <img
+                      className="ip-preview"
+                      src={previewUrl}
+                      alt="업로드한 사고 사진"
+                    />
                     <div className="ip-preview__overlay">
                       <p className="ip-preview__name">{file?.name}</p>
                       <p className="ip-preview__size">
@@ -100,48 +222,64 @@ export default function IncidentPhotoPage() {
                 ) : (
                   <div className="ip-dropzone__empty">
                     <div className="ip-dropzone__icon">📷</div>
-                    <p className="ip-dropzone__title">사진을 선택하거나 끌어다 놓으세요</p>
+                    <p className="ip-dropzone__title">
+                      카메라로 즉시 촬영하거나 갤러리에서 선택하세요
+                    </p>
                     <p className="ip-dropzone__hint">
-                      📸 카메라 / 🖼 갤러리 모두 가능 · jpg · png · heic
+                      📸 웹캠 / 후면 카메라 · 🖼 jpg · png · heic
                     </p>
                   </div>
                 )}
               </div>
 
-              <div className="ip-action-row">
-                {previewUrl && (
-                  <button
-                    type="button"
-                    className="t-btn t-btn-ghost"
-                    onClick={reset}
-                    disabled={phase === 'analyzing'}
-                  >
-                    다시 선택
-                  </button>
-                )}
-                {!previewUrl ? (
-                  <button
-                    type="button"
-                    className="t-btn t-btn-primary"
-                    onClick={() => fileRef.current?.click()}
-                  >
-                    📷 사진 선택
-                  </button>
-                ) : (
-                  <button
-                    type="button"
-                    className="t-btn t-btn-primary"
-                    onClick={analyze}
-                    disabled={phase === 'analyzing'}
-                  >
-                    {phase === 'analyzing' ? '분석 중...' : '✦ AI 분석 시작'}
-                  </button>
-                )}
-              </div>
+              {/* 액션 버튼들 */}
+              {!cameraOn && (
+                <div className="ip-action-row">
+                  {previewUrl && (
+                    <button
+                      type="button"
+                      className="t-btn t-btn-ghost"
+                      onClick={reset}
+                      disabled={phase === 'analyzing'}
+                    >
+                      다시 선택
+                    </button>
+                  )}
+                  {!previewUrl && (
+                    <>
+                      <button
+                        type="button"
+                        className="t-btn t-btn-ghost"
+                        onClick={() => fileRef.current?.click()}
+                      >
+                        🖼 갤러리에서 선택
+                      </button>
+                      <button
+                        type="button"
+                        className="t-btn t-btn-primary"
+                        onClick={startCamera}
+                        disabled={camStarting}
+                      >
+                        {camStarting ? '카메라 여는 중...' : '📷 카메라로 촬영'}
+                      </button>
+                    </>
+                  )}
+                  {previewUrl && (
+                    <button
+                      type="button"
+                      className="t-btn t-btn-primary"
+                      onClick={analyze}
+                      disabled={phase === 'analyzing'}
+                    >
+                      {phase === 'analyzing' ? '분석 중...' : '✦ AI 분석 시작'}
+                    </button>
+                  )}
+                </div>
+              )}
 
               {phase === 'analyzing' && <AnalyzingProgress />}
-              {phase === 'error' && (
-                <div className="ip-banner ip-banner--error">⚠ {error}</div>
+              {(phase === 'error' || error) && (
+                <div className="ip-banner ip-banner--error">⚠ {error || '오류가 발생했습니다.'}</div>
               )}
             </section>
           )}
@@ -215,7 +353,6 @@ function ResultView({ result, onRestart, navigate }) {
         </button>
       </div>
 
-      {/* 관찰 / 환자 상태 */}
       <div className="ip-grid-2">
         <div className="glass-card">
           <h3 className="card-title">📷 사진에서 관찰</h3>
@@ -230,7 +367,6 @@ function ResultView({ result, onRestart, navigate }) {
         </div>
       </div>
 
-      {/* 즉시 조치 단계 */}
       <section className="ip-block">
         <div className="ip-block__head">
           <span className="eyebrow">즉시 조치</span>
@@ -250,7 +386,6 @@ function ResultView({ result, onRestart, navigate }) {
         </ol>
       </section>
 
-      {/* 약관 매핑 */}
       <section className="ip-block">
         <div className="ip-block__head">
           <span className="eyebrow">연구실안전공제</span>
@@ -274,7 +409,6 @@ function ResultView({ result, onRestart, navigate }) {
         </ul>
       </section>
 
-      {/* CTA */}
       <div className="ip-cta-row">
         <button
           type="button"

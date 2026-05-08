@@ -173,8 +173,122 @@
   display: flex;
   justify-content: flex-end;
   gap: 10px;
+  flex-wrap: wrap;
 }
 .ip-action-row .t-btn { min-width: 160px; }
+
+/* ─── Camera live view ──────────────────────────── */
+.ip-dropzone.is-camera {
+  background: #000;
+  border-style: solid;
+  border-color: var(--line-2);
+  padding: 0;
+}
+.ip-camera {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16 / 10;
+  background: #000;
+  overflow: hidden;
+  border-radius: calc(var(--r-2xl) - 2px);
+}
+.ip-camera__video {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+/* 4-corner viewfinder guide */
+.ip-camera__guide {
+  position: absolute;
+  inset: 24px;
+  pointer-events: none;
+}
+.ip-camera__corner {
+  position: absolute;
+  width: 28px;
+  height: 28px;
+  border: 2px solid rgba(255, 255, 255, 0.85);
+}
+.ip-camera__corner.tl { top: 0; left: 0; border-right: none; border-bottom: none; border-top-left-radius: 6px; }
+.ip-camera__corner.tr { top: 0; right: 0; border-left: none; border-bottom: none; border-top-right-radius: 6px; }
+.ip-camera__corner.bl { bottom: 0; left: 0; border-right: none; border-top: none; border-bottom-left-radius: 6px; }
+.ip-camera__corner.br { bottom: 0; right: 0; border-left: none; border-top: none; border-bottom-right-radius: 6px; }
+
+/* Bottom control bar */
+.ip-camera__bar {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  align-items: center;
+  gap: 12px;
+  padding: 16px 20px;
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.6), transparent);
+  z-index: 2;
+}
+.ip-camera__cancel {
+  justify-self: start;
+  padding: 8px 16px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.18);
+  -webkit-backdrop-filter: blur(12px);
+  backdrop-filter: blur(12px);
+  color: #fff;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  font-family: inherit;
+}
+.ip-camera__cancel:hover { background: rgba(255, 255, 255, 0.28); }
+
+/* iOS 스타일 shutter — 큰 흰 원 + 안쪽 원 */
+.ip-camera__shutter {
+  width: 72px;
+  height: 72px;
+  border-radius: 50%;
+  border: 4px solid #fff;
+  background: transparent;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  transition: transform 0.1s, border-color 0.15s;
+}
+.ip-camera__shutter:hover { transform: scale(1.05); }
+.ip-camera__shutter:active { transform: scale(0.92); border-color: rgba(255, 255, 255, 0.8); }
+.ip-camera__shutter > span {
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  background: #fff;
+  display: block;
+  transition: background 0.15s;
+}
+.ip-camera__shutter:active > span { background: #ffe4e6; }
+
+.ip-camera__hint {
+  justify-self: end;
+  font-size: 11px;
+  color: rgba(255, 255, 255, 0.85);
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  text-align: right;
+}
+@media (max-width: 720px) {
+  .ip-camera { aspect-ratio: 3 / 4; }
+  .ip-camera__hint { display: none; }
+  .ip-camera__bar { grid-template-columns: 1fr auto 1fr; padding: 14px; }
+  .ip-camera__shutter { width: 64px; height: 64px; }
+  .ip-camera__shutter > span { width: 48px; height: 48px; }
+}
 
 /* Banner */
 .ip-banner {
