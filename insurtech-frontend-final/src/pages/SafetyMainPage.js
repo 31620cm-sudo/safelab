@@ -203,6 +203,17 @@ export default function SafetyMainPage() {
             </div>
             <span className="sm-extra-arrow">→</span>
           </button>
+          <button
+            className="sm-extra-item"
+            onClick={() => navigate('/safety/cases')}
+          >
+            <span>📚</span>
+            <div>
+              <strong>실습실 사고사례 10건 학습</strong>
+              <small>「2026 안전교육자료」 PDF 실제 사례 — 면장갑·MSDS·밸브 잠금</small>
+            </div>
+            <span className="sm-extra-arrow">→</span>
+          </button>
         </div>
       </div>
     </div>
