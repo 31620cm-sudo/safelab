@@ -13,6 +13,7 @@ import EmergencyPage from './pages/EmergencyPage';
 import IncidentPhotoPage from './pages/IncidentPhotoPage';
 import BuildingSafetyPage from './pages/BuildingSafetyPage';
 import IncidentCasesPage from './pages/IncidentCasesPage';
+import MsdsLearnPage from './pages/MsdsLearnPage';
 import EmergencyFab from './components/EmergencyFab';
 
 // 보험 부분 — "이후로 분리" 요구에 맞춰 별도 라우트로 유지
@@ -45,6 +46,7 @@ function App() {
         <Route path="/incident/photo" element={<IncidentPhotoPage />} />
         <Route path="/buildings" element={<BuildingSafetyPage />} />
         <Route path="/safety/cases" element={<IncidentCasesPage />} />
+        <Route path="/safety/msds" element={<MsdsLearnPage />} />
 
         {/* 보험 부분 (분리 모듈) */}
         <Route path="/insurance/consult" element={<DeviceCheckPage />} />

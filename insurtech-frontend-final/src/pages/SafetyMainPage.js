@@ -214,6 +214,17 @@ export default function SafetyMainPage() {
             </div>
             <span className="sm-extra-arrow">→</span>
           </button>
+          <button
+            className="sm-extra-item"
+            onClick={() => navigate('/safety/msds')}
+          >
+            <span>🧪</span>
+            <div>
+              <strong>MSDS 학습 — 화학물질 안전 표준</strong>
+              <small>16개 항목 + GHS 그림문자 9종 + 실제 시약 5종 (Sodium azide 등)</small>
+            </div>
+            <span className="sm-extra-arrow">→</span>
+          </button>
         </div>
       </div>
     </div>
