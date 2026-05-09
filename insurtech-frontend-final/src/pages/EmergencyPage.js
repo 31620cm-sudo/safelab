@@ -2,7 +2,10 @@ import React, { useMemo } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { COMMON_EMERGENCY } from '../data/emergencyCommon';
 import { getDepartment } from '../data/departments';
+import { SEVERITY_LEVELS, REPORTING_CHAINS } from '../data/incidentTypes';
 import './EmergencyPage.css';
+
+const SEVERITY_ORDER = ['심각', '경계', '주의', '관심'];
 
 export default function EmergencyPage() {
   const navigate = useNavigate();
@@ -67,6 +70,58 @@ export default function EmergencyPage() {
               <span className="em-warn__label">즉시 호출</span>
             </div>
           </div>
+
+          {/* 사고 등급별 신고 가이드 (B 패키지) */}
+          <section className="em-section">
+            <div className="em-section__head">
+              <span className="eyebrow">사고 등급별 신고 가이드</span>
+              <h2>등급에 따라 신고처가 다릅니다</h2>
+              <p>출처: 인하공전 「2026 대학안전관리계획」 p.24~25 사고등급 평가 매트릭스</p>
+            </div>
+            <div className="em-severity-grid">
+              {SEVERITY_ORDER.map((sev) => {
+                const meta = SEVERITY_LEVELS[sev];
+                const chain = REPORTING_CHAINS[sev] || [];
+                return (
+                  <details key={sev} className={`em-severity em-severity--${meta.color}`}>
+                    <summary className="em-severity__summary">
+                      <span className={`pill ${meta.pillClass} em-severity__pill`}>
+                        {meta.label}
+                      </span>
+                      <span className="em-severity__desc">{meta.description}</span>
+                      <span className="em-severity__deadline">{meta.deadline}</span>
+                      <span className="em-severity__chev" aria-hidden>▾</span>
+                    </summary>
+                    <ol className="em-severity__chain">
+                      {chain.map((r) => (
+                        <li key={r.step} className="em-severity__step">
+                          <span className="em-severity__num">{String(r.step).padStart(2, '0')}</span>
+                          <div>
+                            <h4>{r.label}</h4>
+                            {r.phone && (
+                              <button
+                                type="button"
+                                className="em-severity__call"
+                                onClick={() =>
+                                  r.kind === 'email'
+                                    ? (window.location.href = `mailto:${r.phone}`)
+                                    : handleCall(r.phone)
+                                }
+                              >
+                                {r.kind === 'email' ? '✉ ' : '📞 '}
+                                {r.phone}
+                              </button>
+                            )}
+                            {r.desc && <p>{r.desc}</p>}
+                          </div>
+                        </li>
+                      ))}
+                    </ol>
+                  </details>
+                );
+              })}
+            </div>
+          </section>
 
           {/* 학과 전용 (있을 때만) */}
           {studentDept && (
