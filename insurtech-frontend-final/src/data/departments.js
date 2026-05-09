@@ -18,6 +18,7 @@ export const DEPARTMENTS = {
         tags: ['화상', '응급세척'],
         summary: '실험 중 황산이 손등에 튀었습니다. 다음 60초 안의 행동을 시뮬레이션합니다.',
         relatedClause: '약관 제3조(보상하는 손해), 별표1 후유장해등급',
+        caseRef: 'case-4', // PDF 사례 4 — 시약병 화상
       },
       {
         id: 'chem-2',
@@ -26,6 +27,16 @@ export const DEPARTMENTS = {
         tags: ['중독', '흡입'],
         summary: '드래프트 챔버가 멈춘 채로 염소가스가 누출되기 시작했습니다.',
         relatedClause: '약관 제3조 ② 유독가스 흡입 중독 포함',
+        caseRef: 'case-9', // PDF 사례 9 — 가스 누출 폭발 (사망)
+      },
+      {
+        id: 'chem-3',
+        title: 'Sodium azide 폭발 — 플라스크 비산',
+        difficulty: '상',
+        tags: ['폭발', 'MSDS', '안면부 부상'],
+        summary: 'Sodium azide(아지드염)을 할로겐화합물로 치환하는 실험 중, 중간생성물 계량 과정에서 마찰·충격으로 폭발이 발생했습니다.',
+        relatedClause: '약관 제3조, 별표1 — MSDS 미숙지 + 보안경 미착용',
+        caseRef: 'case-2', // PDF 사례 2
       },
     ],
     emergencyContacts: [
@@ -48,17 +59,28 @@ export const DEPARTMENTS = {
         id: 'mech-1',
         title: '선반 작업 중 옷자락 끼임',
         difficulty: '상',
-        tags: ['끼임', '절단'],
-        summary: '선반 회전 중 작업복 소매가 척에 빨려 들어가는 상황입니다.',
+        tags: ['끼임', '절단', '회전부'],
+        summary: '선반 회전 중 작업복 소매가 척에 빨려 들어가는 상황입니다. PDF 안전수칙: 면장갑 착용 제한, 옷소매 단정, 회전 중 칩 제거 금지.',
         relatedClause: '약관 별표1 1~3급 후유장해(상지 절단)',
+        caseRef: 'case-7', // PDF 사례 7 — 드릴 면장갑 손가락 절단
       },
       {
         id: 'mech-2',
         title: '그라인더 파편 안구 비산',
         difficulty: '중',
-        tags: ['안구', '외상'],
-        summary: '보안경 미착용 상태로 그라인더 작업 중 파편이 튀었습니다.',
+        tags: ['안구', '외상', '보안경'],
+        summary: '보안경 미착용 상태로 그라인더 작업 중 파편이 튀었습니다. PDF 안전수칙: 가공 작업 시 보안경 착용 + 칩 비산방지장치 설치.',
         relatedClause: '약관 별표1 1~3급(시력 상실)',
+        caseRef: null,
+      },
+      {
+        id: 'mech-3',
+        title: '직물압착롤러에 손 물림 — 라텍스 장갑',
+        difficulty: '상',
+        tags: ['끼임', '회전부', '장갑'],
+        summary: '학부생이 직물압착롤러로 난연재 코팅 실험 중, 라텍스 장갑이 두 실린더 표면 마찰에 빨려 들어가 오른손 다발성 골절·신경손상.',
+        relatedClause: '약관 별표1 — 회전부 끼임 + 안전 방호장치 미설치',
+        caseRef: 'case-8', // PDF 사례 8
       },
     ],
     emergencyContacts: [
@@ -82,16 +104,27 @@ export const DEPARTMENTS = {
         title: '배전반 작업 중 감전',
         difficulty: '상',
         tags: ['감전', '낙하'],
-        summary: '활선 차단을 확인하지 않고 배전반에 접촉하여 감전됐습니다.',
+        summary: '활선 차단을 확인하지 않고 배전반에 접촉하여 감전됐습니다. PDF 안전수칙: 누전차단기 월 1회 시험, 습기/물기 환경 접지 필수.',
         relatedClause: '약관 제3조, 별표1 신경계통 장해',
+        caseRef: null,
       },
       {
         id: 'elec-2',
         title: '실습실 분전반 합선 화재',
         difficulty: '중',
         tags: ['화재', '연기흡입'],
-        summary: '브레이커가 트립되며 분전반에서 불꽃과 연기가 올라옵니다.',
+        summary: '브레이커가 트립되며 분전반에서 불꽃과 연기가 올라옵니다. 즉시 전원 차단 + 119 신고.',
         relatedClause: '약관 제4장 중대한 화상치료 간접지원금',
+        caseRef: 'case-5', // PDF 사례 5 — 모터 스파크 화재
+      },
+      {
+        id: 'elec-3',
+        title: '리튬 배터리 보관 화재',
+        difficulty: '상',
+        tags: ['화재', '배터리', 'MSDS'],
+        summary: '실습실 리튬 배터리가 과충전 상태로 방치되어 발화. 단락·이단 적재·인화성 물질 접촉이 주 원인.',
+        relatedClause: 'PDF p.45 배터리 안전수칙 11개 — 충전 50~60% 보관, 절연 매트',
+        caseRef: 'case-6', // PDF 사례 6 — 모터 과열 화재 (인접 화재 사례)
       },
     ],
     emergencyContacts: [
@@ -115,16 +148,18 @@ export const DEPARTMENTS = {
         title: '서버실 UPS 발열 화재',
         difficulty: '중',
         tags: ['화재', '연기흡입'],
-        summary: '서버실 UPS에서 타는 냄새가 나고 연기가 보입니다.',
+        summary: '서버실 UPS에서 타는 냄새가 나고 연기가 보입니다. 즉시 전원 차단 + 소화기 사용은 초기 5초만.',
         relatedClause: '약관 제4장 중대한 화상치료 간접지원금',
+        caseRef: 'case-6',
       },
       {
         id: 'comp-2',
-        title: '장시간 작업 후 의식 저하 (저혈당/탈수)',
+        title: '장시간 작업 후 의식 저하 — CPR 상황',
         difficulty: '하',
-        tags: ['응급', '의식저하'],
-        summary: '팀 프로젝트 밤샘 중 동료가 의식이 흐려졌습니다.',
-        relatedClause: '약관 제3조 보상하는 손해 (연구활동 중 사고)',
+        tags: ['응급', '의식저하', 'CPR'],
+        summary: '팀 프로젝트 밤샘 중 동료가 의식이 흐려졌습니다. 어깨 두드림 → 119 신고 → 흉부압박 30회 → 인공호흡 2회.',
+        relatedClause: '약관 제3조 보상하는 손해 (연구활동 중 사고) / PDF p.47 CPR 5단계',
+        caseRef: null,
       },
     ],
     emergencyContacts: [
