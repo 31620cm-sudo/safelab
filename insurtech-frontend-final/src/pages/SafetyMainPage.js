@@ -170,6 +170,28 @@ export default function SafetyMainPage() {
             </div>
             <span className="sm-extra-arrow">→</span>
           </button>
+          <button
+            className="sm-extra-item"
+            onClick={() => navigate('/buildings')}
+          >
+            <span>🏛️</span>
+            <div>
+              <strong>내 강의실 안전등급</strong>
+              <small>캠퍼스 25개 동 인증 / 내진 평가 검색</small>
+            </div>
+            <span className="sm-extra-arrow">→</span>
+          </button>
+          <button
+            className="sm-extra-item"
+            onClick={() => navigate('/incident/photo')}
+          >
+            <span>📷</span>
+            <div>
+              <strong>사진으로 사고 신고</strong>
+              <small>AI가 사고 등급 자동 분류 + 신고처 안내</small>
+            </div>
+            <span className="sm-extra-arrow">→</span>
+          </button>
         </div>
       </div>
     </div>
