@@ -192,6 +192,17 @@ export default function SafetyMainPage() {
             </div>
             <span className="sm-extra-arrow">→</span>
           </button>
+          <button
+            className="sm-extra-item"
+            onClick={() => navigate('/insurance/simulator')}
+          >
+            <span>💰</span>
+            <div>
+              <strong>내가 받을 수 있는 보상은?</strong>
+              <small>4종 보험 + 부상 정도 입력 → 보상액 시뮬레이션</small>
+            </div>
+            <span className="sm-extra-arrow">→</span>
+          </button>
         </div>
       </div>
     </div>
